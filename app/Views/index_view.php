@@ -9,12 +9,15 @@
     <!-- MediaElement.js CSS -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/5.0.5/mediaelementplayer.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdn.plyr.io/3.7.2/plyr.polyfilled.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="#">Brand</a>
+            <!-- <a class="navbar-brand" href="#">Brand</a> -->
+             <img src="img/logo_principal.png" alt="grupo_terra">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -27,7 +30,7 @@
                         <a class="nav-link" href="#">Features</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
+                        <a class="nav-link" href="#"><b>Contacto</b></a>
                     </li>
                 </ul>
             </div>
@@ -45,32 +48,29 @@
             <div class="col-md-3">
                 <div class="card" data-toggle="modal" data-target="#modalRadio1">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Radio 1</h5>
-                            <p class="card-text">Escuchar</p>
+                            <!-- <h5 class="card-title">Radio 1</h5> -->
+                            <img src="img/radio_terra.png" alt="radio_terra">
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card" data-toggle="modal" data-target="#modalRadio2">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Radio 2</h5>
-                            <p class="card-text">Escuchar</p>
+                            <img src="img/radio_cielo.png" alt="radio_terra">
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card" data-toggle="modal" data-target="#modalRadio3">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Radio 3</h5>
-                            <p class="card-text">Escuchar</p>
+                            <img src="img/radio_del_valle.png" alt="radio_terra">
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card" data-toggle="modal" data-target="#modalRadio4">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Radio 4</h5>
-                            <p class="card-text">Escuchar</p>
+                            <img src="img/radio_por_vos.png" alt="radio_terra">
                         </div>
                     </div>
                 </div>
@@ -220,34 +220,9 @@
         </div>
     </div>
 
-    <style>
-        .timeline {
-            position: relative;
-            width: 100%;
-            padding: 20px 0;
-            list-style: none;
-        }
-
-        .timeline-item {
-            position: relative;
-            width: 100%;
-            padding: 20px 0;
-            margin: 0 20px 20px 20px;
-            border-left: 2px solid #333;
-        }
-
-        .timeline-item-content {
-            position: relative;
-            margin-left: 20px;
-        }
-
-        .timeline-item-content p:first-child {
-            font-weight: bold;
-        }
-    </style>
 
 
-    <div class="container mt-4 mb-4 radio-card">
+    <!-- <div class="container mt-4 mb-4 radio-card">
         <div class="card">
             <div class="card-header text-white">
                 <h5 class="mb-0">Radio en Vivo</h5>
@@ -259,7 +234,7 @@
                 </audio>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
 
@@ -298,9 +273,35 @@
     <div class="container mt-4 mb-4" id="contacto">
         <div class="row">
             <div class="col">
-                <h1>¡Contactanos!</h1>
+                <h1>Contactanos</h1>
             </div>
         </div>
+        <div class="row">
+                <div class="col">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a href="https://www.facebook.com" target="_blank">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://www.twitter.com" target="_blank">
+                                <i class="bi bi-twitter"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=terrafmsanluis@gmail.com&su=Solicitud para publicitar en Grupo Terra" target="_blank">
+                                <i class="bi bi-envelope"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://api.whatsapp.com/send?phone=5492664580029&text=Quiero%20publicitar%20en%20radio.%20Aguardo%20que%20me%20contacte%20un%20representante%20de%20venta." target="_blank">
+                                <i class="bi bi-whatsapp"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
     </div>  
 
 
