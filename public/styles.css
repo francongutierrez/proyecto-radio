@@ -11,6 +11,7 @@ body {
 
 }
 
+/* Ajustes de diseño general */
 nav {
     background-color: #333;
     padding: 10px;
@@ -34,41 +35,124 @@ nav img {
 }
 
 #main {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 34rem;
+    margin-top: 70px; /* Evitar superposición con el nav */
+    width: 100%; /* Asegura que ocupe todo el ancho */
+    padding: 0; /* Elimina el padding lateral */
     display: flex;
-    flex-direction: column; /* Alinea las filas una encima de la otra */
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos hijos */
 }
 
+
+/* Ajustar el tamaño del título para pantallas móviles */
 #main h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
+    text-align: center;
 }
 
-
+/* Diseño de las tarjetas */
 #main .card { 
     border: white solid 1px;
     border-radius: 8px;
-    margin: 1rem;
-    padding: 0rem;
+    margin: 0; /* Eliminar margen */
+    padding: 0; /* Mantener el padding en 0 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #333;
     color: white;
-    width: 15rem;
+    width: 100%; /* Ocupa todo el ancho disponible */
     height: 12rem;
 }
 
-
 #main .card img { 
-    width: 100%;    
+    width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
+/* Ajuste para pantallas pequeñas (dispositivos móviles) */
+@media (max-width: 768px) {
+    #main {
+        margin-top: 60px;
+    }
+
+    /* Cambiar el ancho de las tarjetas para que se ajusten mejor en móviles */
+    #main .col-6 {
+        width: 50%; /* Dos tarjetas por fila */
+        padding: 0.25rem;
+    }
+
+    #main h1 {
+        font-size: 2rem; /* Reducir tamaño del título en móviles */
+    }
+}
+
+
+
+
+
+
+
+
+
+#modalRadio1 .modal-dialog {
+    max-width: 65%;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    #modalRadio1 .modal-dialog {
+        max-width: 95%;
+    }
+}
+
+#modalRadio1 .modal-content {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+#modalRadio1 .close span {
+    color: #ffffff;
+}
+
+#modalRadio1 .modal-footer .btn-primary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+#modalRadio1 audio {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+#modalRadio1 .modal-footer .btn-primary:focus,
+#modalRadio1 .modal-footer .btn-primary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+#modalRadio1 .modal-body img.img-fluid {
+    margin-top: 15px;
+}
+
+
+#banner-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+}
+
+#banner-container a {
+    display: block; 
+    text-align: center; 
+}
+
+#banner-container img {
+    max-width: 100%; 
+    height: auto; 
+}
+
+
 
 
 .radio-card .card .card-header { 
@@ -125,14 +209,24 @@ nav img {
     align-items: center;
     justify-content: center;
     gap: 5rem;
+    flex-wrap: wrap;
 }
 
 .bi {
     color: #ec8600;
-    font-size: 8rem;
-
-
+    font-size: 10rem;
 }
+
+@media (max-width: 768px) {
+    .bi {
+        font-size: 8rem;
+    }
+
+    .list-inline {
+        gap: 3rem;
+    }
+}
+
 
 
 footer {

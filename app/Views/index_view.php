@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdn.plyr.io/3.7.2/plyr.polyfilled.js"></script>
+    <script src="scripts.js" defer></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg">
@@ -45,53 +46,96 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-6 col-md-3">
                 <div class="card" data-toggle="modal" data-target="#modalRadio1">
-                        <div class="card-body text-center">
-                            <!-- <h5 class="card-title">Radio 1</h5> -->
-                            <img src="img/radio_terra.png" alt="radio_terra">
-                        </div>
+                    <div class="card-body text-center">
+                        <img src="img/radio_terra.png" alt="radio_terra">
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card" data-toggle="modal" data-target="#modalRadio2">
-                        <div class="card-body text-center">
-                            <img src="img/radio_cielo.png" alt="radio_terra">
-                        </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card" data-toggle="modal" data-target="#modalRadio2">
+                    <div class="card-body text-center">
+                        <img src="img/radio_cielo.png" alt="radio_cielo">
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card" data-toggle="modal" data-target="#modalRadio3">
-                        <div class="card-body text-center">
-                            <img src="img/radio_del_valle.png" alt="radio_terra">
-                        </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card" data-toggle="modal" data-target="#modalRadio3">
+                    <div class="card-body text-center">
+                        <img src="img/radio_del_valle.png" alt="radio_del_valle">
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card" data-toggle="modal" data-target="#modalRadio4">
-                        <div class="card-body text-center">
-                            <img src="img/radio_por_vos.png" alt="radio_terra">
-                        </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card" data-toggle="modal" data-target="#modalRadio4">
+                    <div class="card-body text-center">
+                        <img src="img/radio_por_vos.png" alt="radio_por_vos">
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 
+
     <!-- Modal -->
-    <div class="modal fade" id="modalRadio1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <!-- <div class="modal fade" id="modalRadio1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Radio 1</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                <audio id="player" controls>
-                <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
-                Tu navegador no soporta la reproducción de audio.
-            </audio>
+                    <p class="d-flex align-items-center">
+                        <img src="img/radio_terra.png" alt="radio_terra" width="50" class="mr-3">
+                        95.1MHz. TERRA FM ES “LA 100 EN SAN LUIS”, La radio mas escuchada del país” con sus reconocidos conductores: Santiago del Moro, Guido Kaczka, Claudia Fontan, Julieta Prandi Alejandra Zalas, Sergio Lapegue, Jonathan Gabay, el “Pelado” Lopez, Ezequiel Dero, Mariano Peluffo, entre otros… Su éxito se debe a la perfecta fusión que coexiste entre las personalidades que están en su programación y a sus contenidos. Su trayectoria la llevo ser un referente en materia musical, es por eso que recibe a los artistas nacionales e internacionales más importantes del mundo de la música, lo cual hace de ella una propuesta muy atractiva, divertida, musical, informativa y de compañía, con los últimos hits, nacionales e internacionales y los clásicos retros de los ‘80 y ‘90.
+                    </p>
+                    <audio id="player" controls>
+                        <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
+                        Tu navegador no soporta la reproducción de audio.
+                    </audio>
+                    <img src="img/banner_id_278.jpg" alt="banner_radio_terra" class="img-fluid">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#programacion">Ver programación</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="modal fade" id="modalRadio1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img src="img/radio_terra.png" alt="radio_terra" width="150" class="mr-3">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="d-flex align-items-center">
+                        95.1MHz. TERRA FM ES “LA 100 EN SAN LUIS”, La radio mas escuchada del país” con sus reconocidos conductores: Santiago del Moro, Guido Kaczka, Claudia Fontan, Julieta Prandi Alejandra Zalas, Sergio Lapegue, Jonathan Gabay, el “Pelado” Lopez, Ezequiel Dero, Mariano Peluffo, entre otros… Su éxito se debe a la perfecta fusión que coexiste entre las personalidades que están en su programación y a sus contenidos. Su trayectoria la llevo ser un referente en materia musical, es por eso que recibe a los artistas nacionales e internacionales más importantes del mundo de la música, lo cual hace de ella una propuesta muy atractiva, divertida, musical, informativa y de compañía, con los últimos hits, nacionales e internacionales y los clásicos retros de los ‘80 y ‘90.
+                    </p>
+                    <audio id="player" controls>
+                        <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
+                        Tu navegador no soporta la reproducción de audio.
+                    </audio>
+                    <div id="banner-container">
+                        <a href="https://google.com" target="_blank">
+                            <img src="img/banner_id_278.jpg" alt="banner_radio_terra" class="img-fluid" style="display: block;">
+                        </a>
+                        <a href="https://google.com" target="_blank">
+                            <img src="img/banner_id_287.jpg" alt="banner_radio_terra" class="img-fluid" style="display: none;">
+                        </a>
+                        <a href="https://google.com" target="_blank">
+                            <img src="img/banner_id_309.jpg" alt="banner_radio_terra" class="img-fluid" style="display: none;">
+                        </a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#programacion">Ver programación</button>
                 </div>
             </div>
         </div>
@@ -155,70 +199,7 @@
     </div>
 
 
-    <div class="container" id="programacion">
-        <div class="row">
-            <div class="col">
-                <h1>Programación</h1>
 
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-item-content">
-                            <p>6:00 AM - 7:00 AM</p>
-                            <p>Noticias y deportes</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-item-content">
-                            <p>7:00 AM - 9:00 AM</p>
-                            <p>Programa de radio</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-item-content">
-                            <p>9:00 AM - 12:00 PM</p>
-                            <p>Programa de radio</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-item-content">
-                            <p>12:00 PM - 1:00 PM</p>
-                            <p>Noticias y deportes</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-item-content">
-                            <p>1:00 PM - 3:00 PM</p>
-                            <p>Programa de radio</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-item-content">
-                            <p>3:00 PM - 5:00 PM</p>
-                            <p>Programa de radio</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-item-content">
-                            <p>5:00 PM - 6:00 PM</p>
-                            <p>Noticias y deportes</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-item-content">
-                            <p>6:00 PM - 8:00 PM</p>
-                            <p>Programa de radio</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-item-content">
-                            <p>8:00 PM - 10:00 PM</p>
-                            <p>Programa de radio</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 
@@ -237,6 +218,22 @@
     </div> -->
 
 
+    <div class="container mt-4 mb-4">
+        <div>
+            <a class="weatherwidget-io" href="https://forecast7.com/es/n33d30n66d34/san-luis/" data-label_1="SAN LUIS" data-label_2="Clima" data-theme="dark" >SAN LUIS Clima</a>
+            <script>
+                !function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (!d.getElementById(id)) {
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = "https://weatherwidget.io/js/widget.min.js";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }
+                }(document, "script", "weatherwidget-io-js");
+            </script>
+        </div>
+    </div> 
 
 
     <div class="container mt-4 mb-4">
@@ -253,22 +250,7 @@
 
     
 
-    <div class="container">
-        <div>
-            <a class="weatherwidget-io" href="https://forecast7.com/es/n33d30n66d34/san-luis/" data-label_1="SAN LUIS" data-label_2="Clima" data-theme="dark" >SAN LUIS Clima</a>
-            <script>
-                !function(d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (!d.getElementById(id)) {
-                        js = d.createElement(s);
-                        js.id = id;
-                        js.src = "https://weatherwidget.io/js/widget.min.js";
-                        fjs.parentNode.insertBefore(js, fjs);
-                    }
-                }(document, "script", "weatherwidget-io-js");
-            </script>
-        </div>
-    </div>  
+ 
 
     <div class="container mt-4 mb-4" id="contacto">
         <div class="row">
@@ -279,7 +261,7 @@
         <div class="row">
                 <div class="col">
                     <ul class="list-inline">
-                        <li class="list-inline-item">
+                        <!-- <li class="list-inline-item">
                             <a href="https://www.facebook.com" target="_blank">
                                 <i class="bi bi-facebook"></i>
                             </a>
@@ -288,7 +270,7 @@
                             <a href="https://www.twitter.com" target="_blank">
                                 <i class="bi bi-twitter"></i>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="list-inline-item">
                             <a href="https://mail.google.com/mail/?view=cm&fs=1&to=terrafmsanluis@gmail.com&su=Solicitud para publicitar en Grupo Terra" target="_blank">
                                 <i class="bi bi-envelope"></i>
