@@ -47,28 +47,28 @@
         </div>
         <div class="row">
             <div class="col-6 col-md-3">
-                <div class="card" data-toggle="modal" data-target="#modalRadio1">
+                <div class="card" data-toggle="modal" data-target="#modalRadio1" onclick="registerClick(1)">
                     <div class="card-body text-center">
                         <img src="img/radio_terra.png" alt="radio_terra">
                     </div>
                 </div>
             </div>
             <div class="col-6 col-md-3">
-                <div class="card" data-toggle="modal" data-target="#modalRadio2">
+                <div class="card" data-toggle="modal" data-target="#modalRadio2" onclick="registerClick(2)">
                     <div class="card-body text-center">
                         <img src="img/radio_cielo.png" alt="radio_cielo">
                     </div>
                 </div>
             </div>
             <div class="col-6 col-md-3">
-                <div class="card" data-toggle="modal" data-target="#modalRadio3">
+                <div class="card" data-toggle="modal" data-target="#modalRadio3" onclick="registerClick(3)">
                     <div class="card-body text-center">
                         <img src="img/radio_del_valle.png" alt="radio_del_valle">
                     </div>
                 </div>
             </div>
             <div class="col-6 col-md-3">
-                <div class="card" data-toggle="modal" data-target="#modalRadio4">
+                <div class="card" data-toggle="modal" data-target="#modalRadio4" onclick="registerClick(4)">
                     <div class="card-body text-center">
                         <img src="img/radio_por_vos.png" alt="radio_por_vos">
                     </div>
@@ -245,7 +245,9 @@
 
 
 
-
+    <div id="telebin" style="display: none;">
+        Reproduciendo: <span id="radioName">TERRA FM</span>
+    </div>
 
 
     

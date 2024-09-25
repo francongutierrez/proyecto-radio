@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\ClickModel;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
@@ -40,6 +41,22 @@ class Home extends BaseController
         } catch (RequestException $e) {
             // Manejar el error e incluir el cuerpo de la respuesta en el mensaje de error para depuración
             return 'Error: ' . $e->getMessage() . ' - Respuesta: ' . ($responseBody ?: 'No hay respuesta disponible');
+        }
+    }
+
+    public function registerClick()
+    {
+        // Verifica si la solicitud es AJAX
+        if ($this->request->isAJAX()) {
+            $radioId = $this->request->getVar('radio_id');
+
+            // Cargar el modelo
+            $clickModel = new ClickModel();
+
+            // Actualiza los clics en la base de datos
+            $clickModel->incrementClick($radioId);
+
+            return $this->response->setJSON(['status' => 'success']);
         }
     }
 }
