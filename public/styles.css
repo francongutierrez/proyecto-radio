@@ -3,11 +3,11 @@ body {
     color: white;
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: 'Poppins', sans-serif; 
     font-size: 14px;
     text-align: center;
     line-height: 1.5;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"; */
 
 }
 
@@ -94,60 +94,60 @@ nav img {
 
 
 
-#modalRadio1 .modal-dialog {
+.modal-radio .modal-dialog {
     max-width: 65%;
     margin: 0 auto;
 }
 
 @media (max-width: 768px) {
-    #modalRadio1 .modal-dialog {
+    .modal-radio .modal-dialog {
         max-width: 95%;
     }
 }
 
-#modalRadio1 .modal-content {
+.modal-radio .modal-content {
     background-color: #343a40;
     color: #ffffff;
 }
 
-#modalRadio1 .close span {
+.modal-radio .close span {
     color: #ffffff;
 }
 
-#modalRadio1 .modal-footer .btn-primary {
+.modal-radio .modal-footer .btn-primary {
     background-color: #6c757d;
     border-color: #6c757d;
 }
 
-#modalRadio1 audio {
+.modal-radio audio {
     background-color: #343a40;
     color: #ffffff;
 }
 
-#modalRadio1 .modal-footer .btn-primary:focus,
-#modalRadio1 .modal-footer .btn-primary:hover {
+.modal-radio .modal-footer .btn-primary:focus,
+.modal-radio .modal-footer .btn-primary:hover {
     background-color: #5a6268;
     border-color: #545b62;
 }
 
-#modalRadio1 .modal-body img.img-fluid {
+.modal-radio .modal-body img.img-fluid {
     margin-top: 15px;
 }
 
 
-#banner-container {
+.banner-container {
     display: flex;
     justify-content: center; 
     align-items: center; 
     flex-direction: column; 
 }
 
-#banner-container a {
+.banner-container a {
     display: block; 
     text-align: center; 
 }
 
-#banner-container img {
+.banner-container img {
     max-width: 100%; 
     height: auto; 
 }
@@ -245,7 +245,7 @@ footer {
 
 
 
-#telebin {
+.telebin {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -256,3 +256,18 @@ footer {
     font-size: 14px;
     z-index: 1050; /* Asegúrate de que esté encima de otros elementos */
 }
+
+
+
+
+
+/* Cambia el color de fondo de los controles del reproductor */
+.plyr--full-ui .plyr__controls {
+    background-color: #363636; /* Color de fondo (puedes cambiarlo a cualquier otro color) */
+}
+
+/* Cambia el color de los iconos (botones, controles, etc.) */
+.plyr--full-ui .plyr__controls button {
+    color: #fff; /* Color de los iconos */
+}
+

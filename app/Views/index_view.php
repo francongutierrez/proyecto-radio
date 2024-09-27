@@ -11,19 +11,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/5.0.5/mediaelementplayer.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.plyr.io/3.7.2/plyr.polyfilled.js"></script>
     <script src="scripts.js" defer></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <!-- <a class="navbar-brand" href="#">Brand</a> -->
-             <img src="img/logo_principal.png" alt="grupo_terra">
+            <a class="navbar-brand" href="#">
+                <img src="img/logo_principal.png" alt="grupo_terra" style="height: 30px;">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav me-auto">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="#">Home</a>
                     </li>
@@ -37,6 +39,8 @@
             </div>
         </div>
     </nav>
+
+
 
     <div class="container" id="main">
         <div class="row">
@@ -105,7 +109,7 @@
         </div>
     </div> -->
 
-    <div class="modal fade" id="modalRadio1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade modal-radio" id="modalRadio1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -118,11 +122,15 @@
                     <p class="d-flex align-items-center">
                         95.1MHz. TERRA FM ES “LA 100 EN SAN LUIS”, La radio mas escuchada del país” con sus reconocidos conductores: Santiago del Moro, Guido Kaczka, Claudia Fontan, Julieta Prandi Alejandra Zalas, Sergio Lapegue, Jonathan Gabay, el “Pelado” Lopez, Ezequiel Dero, Mariano Peluffo, entre otros… Su éxito se debe a la perfecta fusión que coexiste entre las personalidades que están en su programación y a sus contenidos. Su trayectoria la llevo ser un referente en materia musical, es por eso que recibe a los artistas nacionales e internacionales más importantes del mundo de la música, lo cual hace de ella una propuesta muy atractiva, divertida, musical, informativa y de compañía, con los últimos hits, nacionales e internacionales y los clásicos retros de los ‘80 y ‘90.
                     </p>
-                    <audio id="player" controls>
+                    <!-- <audio id="player" controls>
+                        <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
+                        Tu navegador no soporta la reproducción de audio.
+                    </audio> -->
+                    <audio id="playerRadio1" controls>
                         <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
                         Tu navegador no soporta la reproducción de audio.
                     </audio>
-                    <div id="banner-container">
+                    <div class="banner-container">
                         <a href="https://google.com" target="_blank">
                             <img src="img/banner_id_278.jpg" alt="banner_radio_terra" class="img-fluid" style="display: block;">
                         </a>
@@ -141,65 +149,118 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalRadio2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade modal-radio" id="modalRadio2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Radio 2</h5>
+                    <img src="img/radio_cielo.png" alt="radio_cielo" width="150" class="mr-3">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <audio controls>
+                    <p class="d-flex align-items-center">
+                        Es la CNN ARGENTINA, te acerca las últimas novedades de San Luis, Argentina y el mundo. Siguiendo nuestro estilo, “siempre del lado de la información”, te contamos los principales sucesos a través de una red destacados periodistas y corresponsales distribuidos en todo el mundo.
+                    </p>
+                    <!-- <audio controls>
+                        <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
+                        Tu navegador no soporta la reproducción de audio.
+                    </audio> -->
+                    <audio id="playerRadio2" controls>
                         <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
                         Tu navegador no soporta la reproducción de audio.
                     </audio>
+                    <div class="banner-container">
+                        <a href="https://google.com" target="_blank">
+                            <img src="img/banner_id_278.jpg" alt="banner_radio_terra" class="img-fluid" style="display: block;">
+                        </a>
+                        <a href="https://google.com" target="_blank">
+                            <img src="img/banner_id_287.jpg" alt="banner_radio_terra" class="img-fluid" style="display: none;">
+                        </a>
+                        <a href="https://google.com" target="_blank">
+                            <img src="img/banner_id_309.jpg" alt="banner_radio_terra" class="img-fluid" style="display: none;">
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="modalRadio3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade modal-radio" id="modalRadio3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Radio 3</h5>
+                    <img src="img/radio_del_valle.png" alt="radio_del_valle" width="150" class="mr-3">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <audio controls>
-                        <source src="https://radio03.ferozo.com/proxy/ra03001507?mp=/stream" type="audio/mpeg">
+                    <p class="d-flex align-items-center">
+                        Es Cadena 3 Merlo, integra la red de emisoras de la Cadena 3 Argentina, la auténtica radio federal, que transmite en forma simultanea las 24 Hs. LV3 Cadena 3 Córdoba, desde Merlo y con cobertura a todo el Valle del Conlara.
+                    </p>
+                    <audio id="playerRadio3" controls>
+                        <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
                         Tu navegador no soporta la reproducción de audio.
                     </audio>
+                    <div class="banner-container">
+                        <a href="https://google.com" target="_blank">
+                            <img src="img/banner_id_278.jpg" alt="banner_radio_terra" class="img-fluid" style="display: block;">
+                        </a>
+                        <a href="https://google.com" target="_blank">
+                            <img src="img/banner_id_287.jpg" alt="banner_radio_terra" class="img-fluid" style="display: none;">
+                        </a>
+                        <a href="https://google.com" target="_blank">
+                            <img src="img/banner_id_309.jpg" alt="banner_radio_terra" class="img-fluid" style="display: none;">
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="modalRadio4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade modal-radio" id="modalRadio4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Radio 4</h5>
+                    <img src="img/radio_por_vos.png" alt="radio_por_vos" width="150" class="mr-3">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <audio controls>
-                        <source src="https://radio04.ferozo.com/proxy/ra04001507?mp=/stream" type="audio/mpeg">
+                    <p class="d-flex align-items-center">
+                        95.1MHz. CIELO FM ES “LA 100 EN MERLO”, con cobertura a todo EL Valle del Conlara. (Merlo, Santa Rosa, Concaran, Tilisarao, Naschel, Carpintería, Los Molles, Cortaderas). La radio mas escuchada del país” con sus reconocidos conductores: Santiago del Moro, Guido Kaczka, Claudia Fontan, Julieta Prandi Alejandra Zalas, Sergio Lapegue, Jonathan Gabay, el “Pelado” Lopez, Ezequiel Dero, Mariano Peluffo, entre otros…Su éxito se debe a la perfecta fusión que coexiste entre las personalidades que están en su programación y a sus contenidos. Su trayectoria la llevo ser un referente en materia musical, es por eso que recibe a los artistas nacionales e internacionales más importantes del mundo de la música, lo cual hace de ella una propuesta muy atractiva, divertida, musical, informativa y de compañía, con los últimos hits, nacionales e internacionales y los clásicos retros de los ´80 y ¨90.
+                    </p>
+                    <audio id="playerRadio4" controls>
+                        <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
                         Tu navegador no soporta la reproducción de audio.
                     </audio>
+                    <div class="banner-container">
+                        <a href="https://google.com" target="_blank">
+                            <img src="img/banner_id_278.jpg" alt="banner_radio_terra" class="img-fluid" style="display: block;">
+                        </a>
+                        <a href="https://google.com" target="_blank">
+                            <img src="img/banner_id_287.jpg" alt="banner_radio_terra" class="img-fluid" style="display: none;">
+                        </a>
+                        <a href="https://google.com" target="_blank">
+                            <img src="img/banner_id_309.jpg" alt="banner_radio_terra" class="img-fluid" style="display: none;">
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+<!-- 
+    <div id="telebin" style="display: none;">
+        Reproduciendo: <span id="radioName">TERRA FM</span>
+    </div> -->
 
-
+    <div class="telebin" id="telebinRadio1" style="display: none;">TERRA FM</div>
+    <div class="telebin" id="telebinRadio2" style="display: none;">CIELO FM</div>
+    <div class="telebin" id="telebinRadio3" style="display: none;">DEL VALLE FM</div>
+    <div class="telebin" id="telebinRadio4" style="display: none;">POR VOS FM</div>
 
 
 
@@ -245,9 +306,7 @@
 
 
 
-    <div id="telebin" style="display: none;">
-        Reproduciendo: <span id="radioName">TERRA FM</span>
-    </div>
+
 
 
     
@@ -337,6 +396,8 @@
 
 
     <!-- MediaElement.js JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/5.0.5/mediaelement-and-player.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
