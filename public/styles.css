@@ -5,43 +5,39 @@ html {
 
 
 body {
-    background-color: black; /* Color de fondo negro */
-    color: white; /* Color del texto */
+    background-color: black;
+    color: white;
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif; 
+    font-family: 'Poppins', sans-serif;
     font-size: 14px;
     text-align: center;
     line-height: 1.5;
-    height: 100vh; /* Ocupa toda la altura de la ventana */
+    height: 100vh;
 }
 
-/* Contenedor para la imagen de fondo */
 .background-image {
-    position: fixed; /* Mantiene la imagen fija en la pantalla */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('img/pngtree.png'); /* Ruta a tu imagen */
-    background-size: cover; /* Cubre toda la pantalla */
-    background-position: center; /* Centra la imagen */
-    opacity: 0.5; /* Ajusta la opacidad de la imagen */
-    z-index: -1; /* Envía la imagen detrás del contenido */
+    background-image: url('img/pngtree.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5;
+    z-index: -1;
 }
 
-/* Asegúrate de que los elementos de contenido tengan un z-index mayor */
 .container {
-    position: relative; /* Permite usar z-index */
-    z-index: 1; /* Asegura que el contenido esté por encima de la imagen */
+    position: relative;
+    z-index: 1;
 }
 
-
-/* Ajustes de diseño general */
 nav.custom-nav {
     background-color: #333;
     color: #ec8600;
-    position: fixed; /* Fija el navbar en la parte superior */
+    position: fixed;
     top: 0;
     width: 100%;
     z-index: 10;
@@ -58,25 +54,22 @@ nav.custom-nav a {
     width: auto;
 }
 
-/* Ajustes para la sección principal (#main) */
 #main {
-    margin-top: 70px; /* Evitar superposición con el navbar */
+    margin-top: 70px; 
     width: 100%; 
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Centra verticalmente */
-    min-height: 100vh; /* Ocupa al menos el 100% del viewport */
+    justify-content: center;
+    min-height: 100vh; 
 }
 
-/* Ajustar el tamaño del título para pantallas móviles */
 #main h1 {
     font-size: 2.5rem;
     text-align: center;
 }
 
-/* Diseño de las tarjetas */
 #main .card { 
     border: white solid 1px;
     border-radius: 8px;
@@ -96,42 +89,37 @@ nav.custom-nav a {
     object-fit: cover;
 }
 
-/* Ajuste para pantallas pequeñas (dispositivos móviles) */
 @media (max-width: 768px) {
     #main {
         margin-top: 60px;
     }
 
-    /* Cambiar el ancho de las tarjetas para que se ajusten mejor en móviles */
     #main .col-6 {
-        width: 50%; /* Dos tarjetas por fila */
+        width: 50%; 
         padding: 0.25rem;
     }
 
     #main h1 {
-        font-size: 2rem; /* Reducir tamaño del título en móviles */
+        font-size: 2rem; 
     }
 }
 
 
-/* Ajustes para el mensaje de bienvenida */
 .welcome-message {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Centra verticalmente */
-    min-height: 100vh; /* Ocupa al menos el 100% del viewport */
+    justify-content: center; 
+    min-height: 100vh; 
 }
 
-/* Asegúrate de que en escritorio se muestre todo correctamente */
 @media (min-width: 769px) {
-    /* Aquí podrías agregar estilos específicos para la versión de escritorio si es necesario */
     #main .row {
-        display: flex; /* Muestra las tarjetas en escritorio */
+        display: flex; 
     }
 
     .welcome-message {
-        min-height: auto; /* Asegúrate de que no ocupe toda la altura en escritorio */
+        min-height: auto; 
     }
 }
 
@@ -233,22 +221,8 @@ nav.custom-nav a {
 
 
 
-#weather {
-    color: black;
-}
-
-#weather h1 {
-    color: white;
-}
-
-.weather-card {
-    margin: 15px;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.weather-icon {
-    width: 50px;
+#climaSanLuis {
+    margin-bottom: 5rem;
 }
 
 .list-inline {
@@ -300,25 +274,25 @@ footer {
     padding: 10px;
     border-radius: 8px;
     font-size: 14px;
-    z-index: 1050; /* Asegúrate de que esté encima de otros elementos */
+    z-index: 1050; 
     margin: 10px 0;
     display: flex;
-    align-items: center; /* Centra verticalmente el texto y las barras */
+    align-items: center;
 }
 
 
 
 
 
-/* Cambia el color de fondo de los controles del reproductor */
+
 .plyr--full-ui .plyr__controls {
-    background-color: #363636; /* Color de fondo (puedes cambiarlo a cualquier otro color) */
+    background-color: #363636; 
 }
 
-/* Cambia el color de los iconos (botones, controles, etc.) */
 .plyr--full-ui .plyr__controls button {
-    color: #fff; /* Color de los iconos */
+    color: #fff; 
 }
+
 
 
 
@@ -326,32 +300,32 @@ footer {
 
 .animation {
     display: flex;
-    margin-right: 5px; /* Espacio entre la animación y el texto */
-    height: 20px; /* Altura del contenedor de la animación */
+    margin-right: 5px; 
+    height: 20px; 
 }
 
 .bar {
-    width: 5px; /* Ancho de las barras */
-    height: 10px; /* Altura inicial de las barras */
-    background-color: #ffffff; /* Color de las barras */
-    margin: 0 2px; /* Espacio entre las barras */
-    animation: heightChange 0.6s infinite alternate; /* Llama a la animación */
+    width: 5px; 
+    height: 10px; 
+    background-color: #ffffff; 
+    margin: 0 2px;
+    animation: heightChange 0.6s infinite alternate;
 }
 
 .bar:nth-child(1) {
-    animation-delay: 0s; /* Sin retraso */
+    animation-delay: 0s; 
 }
 .bar:nth-child(2) {
-    animation-delay: 0.1s; /* Un poco de retraso para la segunda barra */
+    animation-delay: 0.1s; 
 }
 .bar:nth-child(3) {
-    animation-delay: 0.2s; /* Un poco de retraso para la tercera barra */
+    animation-delay: 0.2s; 
 }
 
 @keyframes heightChange {
-    0% { height: 10px; } /* Altura inicial */
-    50% { height: 20px; } /* Altura máxima */
-    100% { height: 10px; } /* Vuelve a la altura inicial */
+    0% { height: 10px; } 
+    50% { height: 20px; } 
+    100% { height: 10px; } 
 }
 
 

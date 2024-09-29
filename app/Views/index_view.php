@@ -83,32 +83,6 @@
 
 
     <!-- Modal -->
-   <!-- <div class="modal fade" id="modalRadio1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p class="d-flex align-items-center">
-                        <img src="img/radio_terra.png" alt="radio_terra" width="50" class="mr-3">
-                        95.1MHz. TERRA FM ES “LA 100 EN SAN LUIS”, La radio mas escuchada del país” con sus reconocidos conductores: Santiago del Moro, Guido Kaczka, Claudia Fontan, Julieta Prandi Alejandra Zalas, Sergio Lapegue, Jonathan Gabay, el “Pelado” Lopez, Ezequiel Dero, Mariano Peluffo, entre otros… Su éxito se debe a la perfecta fusión que coexiste entre las personalidades que están en su programación y a sus contenidos. Su trayectoria la llevo ser un referente en materia musical, es por eso que recibe a los artistas nacionales e internacionales más importantes del mundo de la música, lo cual hace de ella una propuesta muy atractiva, divertida, musical, informativa y de compañía, con los últimos hits, nacionales e internacionales y los clásicos retros de los ‘80 y ‘90.
-                    </p>
-                    <audio id="player" controls>
-                        <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
-                        Tu navegador no soporta la reproducción de audio.
-                    </audio>
-                    <img src="img/banner_id_278.jpg" alt="banner_radio_terra" class="img-fluid">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#programacion">Ver programación</button>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
     <div class="modal fade modal-radio" id="modalRadio1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -122,10 +96,6 @@
                     <p class="d-flex align-items-center">
                         95.1MHz. TERRA FM ES “LA 100 EN SAN LUIS”, La radio mas escuchada del país” con sus reconocidos conductores: Santiago del Moro, Guido Kaczka, Claudia Fontan, Julieta Prandi Alejandra Zalas, Sergio Lapegue, Jonathan Gabay, el “Pelado” Lopez, Ezequiel Dero, Mariano Peluffo, entre otros… Su éxito se debe a la perfecta fusión que coexiste entre las personalidades que están en su programación y a sus contenidos. Su trayectoria la llevo ser un referente en materia musical, es por eso que recibe a los artistas nacionales e internacionales más importantes del mundo de la música, lo cual hace de ella una propuesta muy atractiva, divertida, musical, informativa y de compañía, con los últimos hits, nacionales e internacionales y los clásicos retros de los ‘80 y ‘90.
                     </p>
-                    <!-- <audio id="player" controls>
-                        <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
-                        Tu navegador no soporta la reproducción de audio.
-                    </audio> -->
                     <audio id="playerRadio1" controls>
                         <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
                         Tu navegador no soporta la reproducción de audio.
@@ -171,14 +141,10 @@
                 </div>
                 <div class="modal-body">
                     <p class="d-flex align-items-center">
-                        Es la CNN ARGENTINA, te acerca las últimas novedades de San Luis, Argentina y el mundo. Siguiendo nuestro estilo, “siempre del lado de la información”, te contamos los principales sucesos a través de una red destacados periodistas y corresponsales distribuidos en todo el mundo.
+                        95.1MHz. CIELO FM ES “LA 100 EN MERLO”, con cobertura a todo EL Valle del Conlara. (Merlo, Santa Rosa, Concaran, Tilisarao, Naschel, Carpintería, Los Molles, Cortaderas). La radio mas escuchada del país” con sus reconocidos conductores: Santiago del Moro, Guido Kaczka, Claudia Fontan, Julieta Prandi Alejandra Zalas, Sergio Lapegue, Jonathan Gabay, el “Pelado” Lopez, Ezequiel Dero, Mariano Peluffo, entre otros…Su éxito se debe a la perfecta fusión que coexiste entre las personalidades que están en su programación y a sus contenidos. Su trayectoria la llevo ser un referente en materia musical, es por eso que recibe a los artistas nacionales e internacionales más importantes del mundo de la música, lo cual hace de ella una propuesta muy atractiva, divertida, musical, informativa y de compañía, con los últimos hits, nacionales e internacionales y los clásicos retros de los ´80 y ¨90.
                     </p>
-                    <!-- <audio controls>
-                        <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
-                        Tu navegador no soporta la reproducción de audio.
-                    </audio> -->
                     <audio id="playerRadio2" controls>
-                        <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
+                        <source src="https://radio02.ferozo.com/proxy/ra02001508?mp=/stream" type="audio/mpeg">
                         Tu navegador no soporta la reproducción de audio.
                     </audio>
                     <div class="banner-container">
@@ -204,7 +170,7 @@
                     
                 </div>
                 <div class="modal-footer">
-                    <a href="https://www.cadena3.com/pagina/programas" target="_blank" class="btn btn-primary">Ver programación</a>
+                    <a href="img/grilla.png" target="_blank" class="btn btn-primary">Ver programación</a>
                 </div>
             </div>
         </div>
@@ -266,10 +232,10 @@
                 </div>
                 <div class="modal-body">
                     <p class="d-flex align-items-center">
-                        95.1MHz. CIELO FM ES “LA 100 EN MERLO”, con cobertura a todo EL Valle del Conlara. (Merlo, Santa Rosa, Concaran, Tilisarao, Naschel, Carpintería, Los Molles, Cortaderas). La radio mas escuchada del país” con sus reconocidos conductores: Santiago del Moro, Guido Kaczka, Claudia Fontan, Julieta Prandi Alejandra Zalas, Sergio Lapegue, Jonathan Gabay, el “Pelado” Lopez, Ezequiel Dero, Mariano Peluffo, entre otros…Su éxito se debe a la perfecta fusión que coexiste entre las personalidades que están en su programación y a sus contenidos. Su trayectoria la llevo ser un referente en materia musical, es por eso que recibe a los artistas nacionales e internacionales más importantes del mundo de la música, lo cual hace de ella una propuesta muy atractiva, divertida, musical, informativa y de compañía, con los últimos hits, nacionales e internacionales y los clásicos retros de los ´80 y ¨90.
+                        Cadena Heat ya se escucha en más de 50 señales de Argentina y su lanzamiento incluye, además, la renovación de parte de su programación. La música tiene un rol protagónico y a través de una simple frase como "Un éxito, siempre" convertimos el slogan en un concepto que en todo momento garantiza una gran canción, cada vez que el oyente la sintonice.
                     </p>
                     <audio id="playerRadio4" controls>
-                        <source src="https://radio02.ferozo.com/proxy/ra02001508?mp=/stream" type="audio/mpeg">
+                        <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
                         Tu navegador no soporta la reproducción de audio.
                     </audio>
                     <div class="banner-container">
@@ -294,18 +260,13 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="img/grilla.png" data-toggle="lightbox" data-title="Programación" data-footer="TERRA FM" target="_blank">
+                    <a href="https://comercial.cadena3.com/perfil-cadena-heat.asp#programacion" data-toggle="lightbox" data-title="Programación" data-footer="TERRA FM" target="_blank">
                         <button type="button" class="btn btn-primary">Ver programación</button>
                     </a>                
                 </div>
             </div>
         </div>
     </div>
-
-<!-- 
-    <div id="telebin" style="display: none;">
-        Reproduciendo: <span id="radioName">TERRA FM</span>
-    </div> -->
 
     <div class="telebin" id="telebinRadio1" style="display: none;">
     <div class="animation">
@@ -343,23 +304,8 @@
 
 
 
-
-    <!-- <div class="container mt-4 mb-4 radio-card">
-        <div class="card">
-            <div class="card-header text-white">
-                <h5 class="mb-0">Radio en Vivo</h5>
-            </div>
-            <div class="card-body text-center">
-                <audio id="player" controls>
-                    <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
-                    Tu navegador no soporta la reproducción de audio.
-                </audio>
-            </div>
-        </div>
-    </div> -->
-
-
-    <div class="container mt-4 mb-4">
+    <div class="container mt-4 mb-4" id="climaSanLuis">
+        <h3 class="text-center mt-4 mb-4">Estado del tiempo en la Ciudad de San Luis</h3>
         <div>
             <a class="weatherwidget-io" href="https://forecast7.com/es/n33d30n66d34/san-luis/" data-label_1="SAN LUIS" data-label_2="Clima" data-theme="dark" >SAN LUIS Clima</a>
             <script>
@@ -377,12 +323,25 @@
     </div> 
 
 
-    <div class="container mt-4 mb-4">
+    <div class="container mt-4 mb-4" id="feedLa100">
+        <h3 class="text-center mt-4 mb-4">Feed - La 100</h3>
             <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
             <div class="elfsight-app-2290e319-686d-4ebe-92bf-a65f0f796f9b" data-elfsight-app-lazy></div>
     </div>
 
-    <div class="container mt-4 mb-4">
+
+    <div class="container mt-4 mb-4" id="climaMerlo">
+        <h3 class="text-center mt-4 mb-4">Estado del tiempo en la Villa de Merlo</h3>
+        <div>
+            <a class="weatherwidget-io" href="https://forecast7.com/es/n32d35n65d02/villa-de-merlo/" data-label_1="MERLO" data-label_2="Clima" data-theme="dark" >MERLO Clima</a>
+            <script>
+            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+            </script>
+        </div>
+    </div>
+
+    <div class="container mt-4 mb-4" id="feedCadena3">
+        <h3 class="text-center mt-4 mb-4">Feed - Cadena 3</h3>
         <script src="https://static.elfsight.com/platform/platform.js" async></script>
         <div class="elfsight-app-8ec4e786-aa24-498a-92af-2779576de49b" data-elfsight-app-lazy></div>
     </div>
@@ -407,16 +366,6 @@
         <div class="row">
                 <div class="col">
                     <ul class="list-inline">
-                        <!-- <li class="list-inline-item">
-                            <a href="https://www.facebook.com" target="_blank">
-                                <i class="bi bi-facebook"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="https://www.twitter.com" target="_blank">
-                                <i class="bi bi-twitter"></i>
-                            </a>
-                        </li> -->
                         <li class="list-inline-item">
                             <a href="https://mail.google.com/mail/?view=cm&fs=1&to=terrafmsanluis@gmail.com&su=Solicitud para publicitar en Grupo Terra" target="_blank">
                                 <i class="bi bi-envelope"></i>
@@ -433,17 +382,6 @@
     </div>  
 
 
-
-   
-
-
-
-    <!-- <div class="container">
-        <h2>hello world</h2>
-        <audio id="player2" controls>
-            <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
-        </audio>
-    </div> --> 
 
 
     <footer class="footer mt-auto py-3">
@@ -485,7 +423,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const player = new MediaElementPlayer('player2', {
-                // Opciones de personalización
+                // Opciones de personalizacion
                 features: ['playpause', 'volume', 'progress', 'current', 'duration'],
                 audioVolume: 'horizontal',
                 audioWidth: 400,
@@ -493,7 +431,7 @@
                 startVolume: 0.8,
                 loop: false,
                 success: function(mediaElement, originalNode, instance) {
-                    // Función de callback si necesitas hacer algo cuando el reproductor se cargue
+                    // Función de callback
                 }
             });
         });
