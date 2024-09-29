@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Seleccionar todos los modales
     const modals = document.querySelectorAll('.modal-radio');
 
     modals.forEach(modal => {
@@ -7,66 +6,40 @@ document.addEventListener("DOMContentLoaded", function () {
         const banners = modal.querySelectorAll('.banner-container img');
         const totalBanners = banners.length;
 
-        // Función para rotar banners dentro de un modal específico
         function rotateBanners() {
             if (banners.length > 0) {
-                // Ocultar el banner actual
                 banners[currentBanner].style.display = 'none';
-                // Avanzar al siguiente banner
                 currentBanner = (currentBanner + 1) % totalBanners;
-                // Mostrar el nuevo banner
                 banners[currentBanner].style.display = 'block';
             }
         }
 
-        // Cambiar de banner cada 10 segundos dentro del modal específico
-        setInterval(rotateBanners, 10000); // 10000 ms = 10 segundos
+        setInterval(rotateBanners, 10000);
     });
 });
 
 
 
 
-/*document.addEventListener("DOMContentLoaded", function () {
-    var audioPlayer = document.getElementById('player');
-    var telebin = document.getElementById('telebin');
-
-    audioPlayer.addEventListener('play', function () {
-        telebin.style.display = 'block'; // Muestra el telebin
-    });
-
-    audioPlayer.addEventListener('pause', function () {
-        telebin.style.display = 'none'; // Oculta el telebin cuando se pausa
-    });
-
-    audioPlayer.addEventListener('ended', function () {
-        telebin.style.display = 'none'; // Oculta el telebin cuando termina
-    });
-});*/
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Seleccionar todos los reproductores de audio
     var players = document.querySelectorAll('audio[id^="playerRadio"]');
 
-    // Inicializar Plyr en cada reproductor
     players.forEach(function(playerElement) {
         const player = new Plyr(playerElement);
 
-        // Obtener el telebin correspondiente al reproductor
         var telebin = document.getElementById(playerElement.id.replace('player', 'telebin'));
 
         player.on('play', function () {
-            telebin.style.display = 'block'; // Mostrar telebin cuando se reproduce
+            telebin.style.display = 'block';
         });
 
         player.on('pause', function () {
-            telebin.style.display = 'none'; // Ocultar telebin cuando se pausa
+            telebin.style.display = 'none';
         });
 
         player.on('ended', function () {
-            telebin.style.display = 'none'; // Ocultar telebin cuando el audio termine
+            telebin.style.display = 'none';
         });
     });
 });
@@ -79,7 +52,7 @@ function registerClick(radioId) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest', // Para identificar la solicitud AJAX
+            'X-Requested-With': 'XMLHttpRequest',
         },
         body: JSON.stringify({ radio_id: radioId })
     })
@@ -91,3 +64,26 @@ function registerClick(radioId) {
         console.error('Error:', error);
     });
 }
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate__animated', 'animate__fadeInDown');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    const welcomeMessages = document.querySelectorAll('.animado'); 
+    welcomeMessages.forEach(message => {
+        observer.observe(message);
+    });
+});
+
