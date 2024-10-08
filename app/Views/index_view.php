@@ -30,6 +30,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#contacto"><b>Contactanos</b></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/app"><b><i class="fas fa-key"></i></b></a>
+                    </li>
                 </ul>
             </div>
         </div>

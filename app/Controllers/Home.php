@@ -59,4 +59,9 @@ class Home extends BaseController
             return $this->response->setJSON(['status' => 'success']);
         }
     }
+
+    public function appIndex()
+    {
+        return view('app_gestion/dashboard');
+    }
 }
