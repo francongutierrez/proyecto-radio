@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
+use App\Models\EmisorasModel;
+use App\Models\ClickModel;
 
 class App extends ResourceController
 {
@@ -14,11 +16,19 @@ class App extends ResourceController
      */
     public function index()
     {
-        // Verificar si el usuario está logueado
         if (!session()->get('is_logged_in')) {
-            return redirect()->to('/login'); // Redirigir si no está logueado
+            return redirect()->to(base_url('/login')); 
         } else {
-            return view('app_gestion/dashboard');
+            $emisorasModel = new EmisorasModel();
+            $clickModel = new ClickModel();
+            $emisoras = $emisorasModel->findAll();
+            foreach ($emisoras as &$emisora) {
+                $clickData = $clickModel->where('radio_id', $emisora['id'])->first();
+                $emisora['clicks'] = $clickData ? $clickData['clicks'] : 0;
+            }
+            $data['title'] = 'Radios';  
+            $data['emisoras'] = $emisoras;
+            return view('app_gestion/dashboard', $data); 
         }
 
     }
