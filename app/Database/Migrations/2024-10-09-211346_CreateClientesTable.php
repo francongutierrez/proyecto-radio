@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateEmisorasTable extends Migration
+class CreateClientesTable extends Migration
 {
     public function up()
     {
@@ -22,9 +22,26 @@ class CreateEmisorasTable extends Migration
                 'type' => 'INT',
                 'constraint' => '20',
             ],
-            'frecuencia' => [
+            'email' => [
                 'type'           => 'VARCHAR',
-                'constraint'     => '50',
+                'constraint'     => '100',
+                'unique'         => true,
+            ],
+            'fecha_alta' => [
+                'type'           => 'DATETIME',
+                'unique'         => true,
+            ],
+            'tipo' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '100',
+            ],
+            'contenido' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '500',
+            ],
+            'duracion' => [
+                'type'       => 'INT',
+                'constraint' => '50',
             ],
             'created_at' => [
                 'type'       => 'DATETIME',
@@ -36,11 +53,11 @@ class CreateEmisorasTable extends Migration
             ]
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('emisoras');
+        $this->forge->createTable('clientes');
     }
 
     public function down()
     {
-        $this->forge->dropTable('emisoras');
+        $this->forge->dropTable('clientes');
     }
 }
