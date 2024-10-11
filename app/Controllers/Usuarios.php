@@ -4,11 +4,8 @@ namespace App\Controllers;
 
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
-use App\Models\EmisorasModel;
-use App\Models\ClickModel;
-use App\Models\ClientesModel;
 
-class App extends ResourceController
+class Usuarios extends ResourceController
 {
     /**
      * Return an array of resource objects, themselves in array format.
@@ -17,21 +14,7 @@ class App extends ResourceController
      */
     public function index()
     {
-        if (!session()->get('is_logged_in')) {
-            return redirect()->to(base_url('/login')); 
-        } else {
-            $emisorasModel = new EmisorasModel();
-            $clickModel = new ClickModel();
-            $emisoras = $emisorasModel->findAll();
-            foreach ($emisoras as &$emisora) {
-                $clickData = $clickModel->where('radio_id', $emisora['id'])->first();
-                $emisora['clicks'] = $clickData ? $clickData['clicks'] : 0;
-            }
-            $data['title'] = 'Radios';  
-            $data['emisoras'] = $emisoras;
-            return view('app_gestion/dashboard', $data); 
-        }
-
+        //
     }
 
     /**
@@ -101,54 +84,13 @@ class App extends ResourceController
     {
         //
     }
-    
+
+
 
     public function register() {
 
         return view('app_gestion/register_view');
     }
-
-    public function login() {
-
-        return view('app_gestion/login_view');
-    }
-
-
-    public function ingresar()
-    {
-        // Obtener datos del formulario
-        $email = $this->request->getPost('email');
-        $password = $this->request->getPost('password');
-    
-        // Cargar el modelo de usuarios
-        $usuarioModel = new \App\Models\UsuariosModel();
-        
-        // Buscar usuario por email
-        $user = $usuarioModel->where('email', $email)->first();
-    
-        // Verificar si el usuario existe y la contraseña es correcta
-        if ($user && password_verify($password, $user['password'])) {
-            // Iniciar sesión
-            session()->set('usuario_id', $user['usuario_id']);
-            session()->set('nombre', $user['nombre']);
-            session()->set('is_logged_in', true);
-            
-            // Redirigir al dashboard o ruta deseada
-            return redirect()->to(base_url('app')); 
-        } else {
-            // Si las credenciales no son válidas, regresar al login con error
-            session()->setFlashdata('error', 'Correo o contraseña incorrectos.');
-            return redirect()->to(base_url('/login'));
-        }
-    }
-    
-
-    // Método para cerrar sesión
-    public function logout() {
-        session()->destroy();
-        return redirect()->to(base_url('login'));
-    }
-
 
     public function registrar() {
         // Obtener los datos del formulario
@@ -206,5 +148,4 @@ class App extends ResourceController
         // Devolver una respuesta exitosa
         return $this->response->setJSON(['success' => true, 'message' => 'Registro exitoso.']);
     }
-    
 }

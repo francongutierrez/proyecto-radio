@@ -22,7 +22,14 @@
                                 <p>Teléfono: <?= esc($cliente['telefono']); ?></p>
                             </div>
                             <div>
-                                <a href="/clientes/editar/<?= esc($cliente['id']); ?>" class="btn btn-warning">Editar</a>
+                                <!-- Botón de editar -->
+                                <a href="clientes/edit/<?= esc($cliente['id']); ?>" class="btn btn-warning">Editar</a>
+                                
+                                <!-- Botón de eliminar -->
+                                <form action="<?= base_url('app/clientes/delete/' . esc($cliente['id'])); ?>" method="post" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este cliente?');">
+                                    <?= csrf_field(); ?> <!-- Protección CSRF -->
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                </form>
                             </div>
                         </li>
                     <?php endforeach; ?>
