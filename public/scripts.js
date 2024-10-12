@@ -87,3 +87,47 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const fileInput = document.querySelector('input[name="contenido"]');
+        const previewButton = document.getElementById('previewButton');
+        
+        // Deshabilitar el botón de previsualización inicialmente
+        previewButton.disabled = true;
+
+        // Habilitar el botón de previsualización cuando se cargue una imagen
+        fileInput.addEventListener('change', function () {
+            if (fileInput.files && fileInput.files.length > 0) {
+                previewButton.disabled = false;
+            } else {
+                previewButton.disabled = true;
+            }
+        });
+    });
+
+
+    function previewImage() {
+        const fileInput = document.querySelector('input[name="contenido"]');
+        
+        // Verificar si se ha seleccionado un archivo
+        if (fileInput && fileInput.files && fileInput.files[0]) {
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                // Mostrar la imagen en el modal
+                const modalImg = document.getElementById('modalImage');
+                if (modalImg) {
+                    modalImg.src = e.target.result; // Asignar la URL generada
+                }
+
+                // Abrir el modal
+                const previewModal = new bootstrap.Modal(document.getElementById('previewModal'));
+                previewModal.show();
+            }
+
+            reader.readAsDataURL(file); // Leer el archivo como URL de datos
+        }
+    }

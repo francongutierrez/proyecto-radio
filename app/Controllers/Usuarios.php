@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
+use App\Models\UsuariosModel;
 
 class Usuarios extends ResourceController
 {
@@ -14,7 +15,24 @@ class Usuarios extends ResourceController
      */
     public function index()
     {
-        //
+        if (!session()->get('is_logged_in')) {
+            return redirect()->to(base_url('/login')); 
+        } else {
+            $usuarioModel = new UsuariosModel();
+        
+            $perPage = 10;
+            $page = $this->request->getVar('page') ? (int)$this->request->getVar('page') : 1;
+    
+    
+            $usuarios = $usuarioModel->paginate($perPage);
+            $pager = $usuarioModel->pager; 
+            $data = [
+                'title' => 'Usuarios',
+                'usuarios' => $usuarios,
+                'pager' => $pager,
+            ];
+            return view('app_gestion/usuarios_vista', $data);
+        }
     }
 
     /**
@@ -36,7 +54,13 @@ class Usuarios extends ResourceController
      */
     public function new()
     {
-        //
+        if (!session()->get('is_logged_in')) {
+            return redirect()->to(base_url('/login')); 
+        } else {
+            helper(['form']);
+            $data['title'] = 'Añadir usuario';
+            return view('app_gestion/crear_usuario_vista', $data);
+        }
     }
 
     /**
@@ -46,8 +70,44 @@ class Usuarios extends ResourceController
      */
     public function create()
     {
-        //
+        // Validar los datos del formulario
+        $validation =  \Config\Services::validation();
+        $validation->setRules([
+            'nombre' => 'required|min_length[3]|max_length[50]',
+            'email' => 'required|valid_email|is_unique[usuarios.email]',
+            'password' => 'required|min_length[6]|max_length[255]',
+            'rol' => 'required|in_list[1,2,3]',
+        ]);
+    
+        if (!$this->validate($validation->getRules())) {
+            // Si la validación falla, volver a mostrar el formulario con errores
+            return redirect()->to('/app/usuarios/new')->withInput()->with('errors', $this->validator->getErrors());
+        }
+    
+        // Obtener los datos del formulario
+        $nombre = $this->request->getPost('nombre');
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password'); // Ya no hashees la contraseña aquí
+        $rol = $this->request->getPost('rol');
+    
+        // Crear el nuevo usuario
+        $usuarioModel = new \App\Models\UsuariosModel();
+    
+        $data = [
+            'nombre' => $nombre,
+            'email' => $email,
+            'password' => $password,  // Pasa la contraseña sin hashear
+            'rol_id' => $rol,
+            'created_at' => date('Y-m-d H:i:s'), // Timestamp de creación
+            'updated_at' => date('Y-m-d H:i:s'), // Timestamp de actualización
+        ];
+    
+        $usuarioModel->insert($data); // Insertar en la base de datos
+    
+        // Redireccionar con mensaje de éxito
+        return redirect()->to('/app/usuarios')->with('success', 'Usuario añadido exitosamente.');
     }
+    
 
     /**
      * Return the editable properties of a resource object.
@@ -58,8 +118,30 @@ class Usuarios extends ResourceController
      */
     public function edit($id = null)
     {
-        //
+        // Cargar el modelo de usuario
+        $usuarioModel = new \App\Models\UsuariosModel();
+    
+        // Buscar el usuario por ID
+        $usuario = $usuarioModel->find($id);
+    
+        // Verificar si el usuario existe
+        if (!$usuario) {
+            // Si no existe, redirigir con un mensaje de error
+            return redirect()->to('/app/usuarios')->with('error', 'Usuario no encontrado.');
+        }
+    
+        // Cargar los roles para el formulario
+        $rolModel = new \App\Models\RolesModel();
+        $roles = $rolModel->findAll();
+    
+        // Pasar los datos a la vista
+        return view('app_gestion/editar_usuarios_vista', [
+            'usuario' => $usuario,
+            'roles' => $roles,
+            'title' => 'Editar usuario',
+        ]);
     }
+    
 
     /**
      * Add or update a model resource, from "posted" properties.
@@ -70,8 +152,44 @@ class Usuarios extends ResourceController
      */
     public function update($id = null)
     {
-        //
+        // Cargar el modelo de usuario
+        $usuarioModel = new \App\Models\UsuariosModel();
+    
+        // Validar los datos del formulario
+        $validation =  \Config\Services::validation();
+        $validation->setRules([
+            'nombre' => 'required|min_length[3]|max_length[50]',
+            'email' => 'required|valid_email',
+            'password' => 'permit_empty|min_length[6]|max_length[255]', // Permitir vacío
+            'rol' => 'required|in_list[1,2,3]',
+        ]);
+    
+        if (!$this->validate($validation->getRules())) {
+            // Si la validación falla, volver a mostrar el formulario con errores
+            return redirect()->to('/app/usuarios/edit/' . esc($id))->withInput()->with('errors', $this->validator->getErrors());
+        }
+    
+        // Obtener los datos del formulario
+        $nombre = $this->request->getPost('nombre');
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password'); // Obtener la contraseña sin hashear
+    
+        // Crear el nuevo usuario
+        $data = [
+            'nombre' => $nombre,
+            'email' => $email,
+            'rol_id' => $this->request->getPost('rol'),
+            'updated_at' => date('Y-m-d H:i:s'), // Timestamp de actualización
+        ];
+    
+    
+        // Actualizar el usuario
+        $usuarioModel->update($id, $data);
+    
+        // Redireccionar con mensaje de éxito
+        return redirect()->to('/app/usuarios')->with('success', 'Usuario actualizado exitosamente.');
     }
+    
 
     /**
      * Delete the designated resource object from the model.
@@ -82,7 +200,20 @@ class Usuarios extends ResourceController
      */
     public function delete($id = null)
     {
-        //
+        // Cargar el modelo de usuario
+        $usuarioModel = new \App\Models\UsuariosModel();
+
+        // Verificar si el usuario existe
+        if (!$usuarioModel->find($id)) {
+            // Si no existe, redirigir con un mensaje de error
+            return redirect()->to('/app/usuarios')->with('error', 'Usuario no encontrado.');
+        }
+
+        // Eliminar el usuario
+        $usuarioModel->delete($id);
+
+        // Redirigir con mensaje de éxito
+        return redirect()->to('/app/usuarios')->with('success', 'Usuario eliminado exitosamente.');
     }
 
 

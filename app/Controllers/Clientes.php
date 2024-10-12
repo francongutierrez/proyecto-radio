@@ -5,6 +5,8 @@ namespace App\Controllers;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\ClientesModel;
+use App\Models\EmisorasModel;
+use App\Models\ClienteEmisorasModel;
 
 class Clientes extends ResourceController
 {
@@ -59,10 +61,20 @@ class Clientes extends ResourceController
             return redirect()->to(base_url('/login')); 
         } else {
             helper(['form']);
-            $data['title'] = 'Crear cliente';
+    
+            // Obtener emisoras desde la base de datos
+            $emisorasModel = new \App\Models\EmisorasModel(); // Asumiendo que tienes un modelo EmisorasModel
+            $emisoras = $emisorasModel->findAll(); // Obtener todas las emisoras disponibles
+            
+            $data = [
+                'title' => 'Crear cliente',
+                'emisoras' => $emisoras, // Pasar las emisoras a la vista
+            ];
+    
             return view('app_gestion/crear_cliente_vista', $data);
         }
     }
+    
 
     /**
      * Create a new resource object, from "posted" parameters.
@@ -78,6 +90,7 @@ class Clientes extends ResourceController
         } else {
     
             $clienteModel = new ClientesModel();
+            $clienteEmisorasModel = new ClienteEmisorasModel(); // Asegúrate de instanciar el modelo aquí
     
             // Configurar las reglas de validación
             $rules = [
@@ -100,13 +113,10 @@ class Clientes extends ResourceController
                     // Mover el archivo a la carpeta 'uploads'
                     $newName = $file->getRandomName(); // Genera un nombre aleatorio
                     $file->move(WRITEPATH . 'uploads', $newName);
-    
-                    // Puedes obtener la ruta completa del archivo:
-                    $filePath = WRITEPATH . 'uploads/' . $newName;
                 }
     
                 // Insertar los datos en la base
-                $clienteModel->save([
+                $clienteId = $clienteModel->insert([
                     'nombre'     => $this->request->getPost('nombre'),
                     'email'      => $this->request->getPost('email'),
                     'telefono'   => $this->request->getPost('telefono'),
@@ -117,18 +127,37 @@ class Clientes extends ResourceController
                     'updated_at' => date('Y-m-d H:i:s'), // Cambia esto para usar la fecha actual
                 ]);
     
+                // Guardar las emisoras seleccionadas
+                $emisorasSeleccionadas = $this->request->getPost('emisoras');
+
+
+                if (!empty($emisorasSeleccionadas)) {
+                    foreach ($emisorasSeleccionadas as $emisoraId) {
+                        // Aquí es donde podría haber un problema si el clienteId no está definido.
+                        $clienteEmisorasModel->save([
+                            'id_cliente' => $clienteId,
+                            'id_emisora' => $emisoraId
+                        ]);
+                    }
+                }
+    
                 return redirect()->to(base_url('/app/clientes'))->with('success', 'Cliente creado exitosamente');
             } else {
                 // Si la validación falla, devolver errores
                 return view('app_gestion/crear_cliente_vista', [
                     'validation' => $this->validator,
-                    'title' => 'Agregar Cliente'
+                    'title' => 'Agregar Cliente',
+                    'emisoras' => $this->emisorasModel->findAll() // Asegúrate de pasar las emisoras de nuevo a la vista
                 ]);
             }
         }
     
         return view('app_gestion/crear_cliente_vista', ['title' => 'Agregar Cliente']);
     }
+    
+    
+    
+    
 
     /**
      * Return the editable properties of a resource object.

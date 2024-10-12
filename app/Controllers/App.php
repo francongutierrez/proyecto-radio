@@ -126,21 +126,30 @@ class App extends ResourceController
         // Buscar usuario por email
         $user = $usuarioModel->where('email', $email)->first();
     
-        // Verificar si el usuario existe y la contraseña es correcta
-        if ($user && password_verify($password, $user['password'])) {
-            // Iniciar sesión
-            session()->set('usuario_id', $user['usuario_id']);
-            session()->set('nombre', $user['nombre']);
-            session()->set('is_logged_in', true);
-            
-            // Redirigir al dashboard o ruta deseada
-            return redirect()->to(base_url('app')); 
+        // Verificar si el usuario existe
+        if ($user) {
+            // Verificar si la contraseña es correcta
+            if (password_verify($password, $user['password'])) {
+                // Iniciar sesión
+                session()->set('usuario_id', $user['usuario_id']); // Cambia usuario_id por id
+                session()->set('nombre', $user['nombre']);
+                session()->set('is_logged_in', true);
+                
+                // Redirigir al dashboard o ruta deseada
+                return redirect()->to(base_url('app')); 
+            } else {
+                // Si la contraseña es incorrecta
+                session()->setFlashdata('error', 'Contraseña incorrecta.');
+            }
         } else {
-            // Si las credenciales no son válidas, regresar al login con error
+            // Si el usuario no existe
             session()->setFlashdata('error', 'Correo o contraseña incorrectos.');
-            return redirect()->to(base_url('/login'));
         }
+    
+        // Redirigir al login con error
+        return redirect()->to(base_url('/login'));
     }
+    
     
 
     // Método para cerrar sesión

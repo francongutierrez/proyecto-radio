@@ -25,6 +25,13 @@ $routes->get('app/clientes/edit/(:num)', 'Clientes::edit/$1');
 $routes->post('app/clientes/edit/(:num)', 'Clientes::update/$1');
 $routes->post('app/clientes/delete/(:num)', 'Clientes::delete/$1');
 
+$routes->get('/app/usuarios', 'Usuarios::index');
+$routes->get('/app/usuarios/new', 'Usuarios::new');
+$routes->post('/app/usuarios/create', 'Usuarios::create');
+$routes->get('app/usuarios/edit/(:num)', 'Usuarios::edit/$1');
+$routes->post('app/usuarios/update/(:num)', 'Usuarios::update/$1');
+$routes->post('app/usuarios/delete/(:num)', 'Usuarios::delete/$1');
+
 
 // $routes->get('/app/clientes/editar/(:num)', 'App::editar/$1');
 
