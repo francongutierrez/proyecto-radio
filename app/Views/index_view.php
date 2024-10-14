@@ -195,9 +195,9 @@
                         Tu navegador no soporta la reproducción de audio.
                     </audio>
                     <div class="banner-container">
-                        <?php foreach ($emisoras[0]['banners'] as $banner): // Cambia el índice según la emisora correspondiente ?>
-                            <a href="#" target="_blank">
-                                <img src="<?= base_url('im/uploads/' . $banner->banner); ?>" alt="banner_<?= $banner->banner; ?>" class="img-fluid"> <!-- Ruta actualizada -->
+                        <?php foreach ($emisoras[2]['banners'] as $banner): // Cambia el índice según la emisora correspondiente ?>
+                            <a href="<?= $banner->url; ?>" target="_blank"> <!-- Cambiamos el href para usar la URL -->
+                                <img src="<?= base_url('img/uploads/' . $banner->banner); ?>" alt="banner_<?= $banner->banner; ?>" class="img-fluid"> <!-- Ruta actualizada -->
                             </a>
                         <?php endforeach; ?>
                     </div>

@@ -17,6 +17,7 @@ class ClientesModel extends Model
         'email',
         'telefono',
         'fecha_alta',
+        'url',
         'contenido',
         'duracion',
         'created_at',

@@ -14,9 +14,32 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
-        setInterval(rotateBanners, 10000);
+        setInterval(rotateBanners, 2000);
     });
 });
+
+
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     const bannerContainers = document.querySelectorAll('.banner-container');
+
+//     bannerContainers.forEach(container => {
+//         let currentBanner = 0;
+//         const banners = container.querySelectorAll('img');
+//         const totalBanners = banners.length;
+
+//         function rotateBanners() {
+//             if (banners.length > 0) {
+//                 banners[currentBanner].style.display = 'none';
+//                 currentBanner = (currentBanner + 1) % totalBanners;
+//                 banners[currentBanner].style.display = 'block';
+//             }
+//         }
+
+//         setInterval(rotateBanners, 10000);
+//     });
+// });
+
 
 
 

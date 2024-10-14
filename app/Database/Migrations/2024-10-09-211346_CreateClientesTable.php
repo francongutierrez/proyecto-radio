@@ -35,6 +35,10 @@ class CreateClientesTable extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
             ],
+            'url' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '100',
+            ],
             'contenido' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '500',

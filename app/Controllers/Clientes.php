@@ -120,6 +120,7 @@ class Clientes extends ResourceController
                     'nombre'     => $this->request->getPost('nombre'),
                     'email'      => $this->request->getPost('email'),
                     'telefono'   => $this->request->getPost('telefono'),
+                    'url'        => $this->request->getPost('url'),
                     'fecha_alta' => $this->request->getPost('fecha_alta'),
                     'contenido'  => $newName, 
                     'duracion'   => $this->request->getPost('duracion'),
@@ -229,12 +230,21 @@ class Clientes extends ResourceController
         // Cargar los modelos necesarios
         $clientModel = new ClientesModel();
         $clienteEmisorasModel = new ClienteEmisorasModel(); // Instanciar el modelo para cliente_emisoras
-    
+        
         // Verificar si el cliente existe
         $client = $clientModel->find($id);
-    
+        
         if ($client) {
-            // Si el cliente existe, eliminar los registros relacionados en cliente_emisoras
+            // Obtener el nombre del archivo de la imagen (contenido)
+            $imageName = $client['contenido'];
+    
+            // Eliminar el archivo de la imagen si existe
+            $imagePath = FCPATH . 'img/uploads/' . $imageName; // Ruta completa del archivo
+            if (is_file($imagePath)) {
+                unlink($imagePath); // Eliminar el archivo
+            }
+    
+            // Eliminar los registros relacionados en cliente_emisoras
             $clienteEmisorasModel->where('id_cliente', $id)->delete(); // Eliminar los registros relacionados
     
             // Luego, eliminar el cliente

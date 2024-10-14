@@ -31,6 +31,11 @@
     </div>
 
     <div class="form-group">
+        <label for="url">URL del Banner</label>
+        <input type="text" name="url" class="form-control" value="<?= set_value('url') ?>" required>
+    </div>
+
+    <div class="form-group">
         <label for="contenido">Banner</label>
         <input type="file" name="contenido" class="form-control" required>
     </div>
