@@ -110,9 +110,9 @@ class Clientes extends ResourceController
                 // Guardar el archivo subido
                 $file = $this->request->getFile('contenido');
                 if ($file->isValid() && !$file->hasMoved()) {
-                    // Mover el archivo a la carpeta 'uploads'
+                    // Mover el archivo a la carpeta 'public/uploads'
                     $newName = $file->getRandomName(); // Genera un nombre aleatorio
-                    $file->move(WRITEPATH . 'uploads', $newName);
+                    $file->move(FCPATH . 'img/uploads', $newName); // Cambiar WRITEPATH a FCPATH
                 }
     
                 // Insertar los datos en la base
@@ -226,21 +226,25 @@ class Clientes extends ResourceController
      */
     public function delete($id = null)
     {
-        // Cargar el modelo de cliente
+        // Cargar los modelos necesarios
         $clientModel = new ClientesModel();
-
+        $clienteEmisorasModel = new ClienteEmisorasModel(); // Instanciar el modelo para cliente_emisoras
+    
         // Verificar si el cliente existe
         $client = $clientModel->find($id);
-
+    
         if ($client) {
-            // Si el cliente existe, eliminarlo
+            // Si el cliente existe, eliminar los registros relacionados en cliente_emisoras
+            $clienteEmisorasModel->where('id_cliente', $id)->delete(); // Eliminar los registros relacionados
+    
+            // Luego, eliminar el cliente
             $clientModel->delete($id);
-
+    
             // Redirigir a la lista de clientes con un mensaje de éxito
             return redirect()->route('app/clientes')->with('success', 'Cliente eliminado exitosamente');
         } else {
             // Si el cliente no existe, redirigir con un mensaje de error
             return redirect()->route('app/clientes')->with('error', 'Cliente no encontrado');
         }
-    }
+    }    
 }

@@ -39,9 +39,7 @@
     </nav>
 
 
-
-
-<div class="container" id="main">
+    <div class="container" id="main">
     
 
     <div class="row">
@@ -197,24 +195,11 @@
                         Tu navegador no soporta la reproducción de audio.
                     </audio>
                     <div class="banner-container">
-                        <a href="https://www.toyotaalianz.com/" target="_blank">
-                            <img src="img/banners/banner_id_247.png" alt="banner_radio_del_valle" class="img-fluid" style="display: block;">
-                        </a>
-                        <a href="https://agenciasanluis.com/" target="_blank">
-                            <img src="img/banners/banner_id_288.png" alt="banner_radio_del_valle" class="img-fluid" style="display: none;">
-                        </a>
-                        <a href="https://www.facebook.com/profile.php?id=100058313264245" target="_blank">
-                            <img src="img/banners/banner_id_309.jpg" alt="banner_radio_del_valle" class="img-fluid" style="display: none;">
-                        </a>    
-                        <a href="https://hiperceramico.com.ar/promociones/" target="_blank">
-                            <img src="img/banners/banner_id_343.jpg" alt="banner_radio_del_valle" class="img-fluid" style="display: none;">
-                        </a>   
-                        <a href="https://www.facebook.com/elboticariofarmacia/" target="_blank">
-                            <img src="img/banners/banner_id_259.jpg" alt="banner_radio_del_valle" class="img-fluid" style="display: none;">
-                        </a>   
-                        <a href="https://autosmediterraneos.com.ar/" target="_blank">
-                            <img src="img/banners/banner_id_327.jpg" alt="banner_radio_del_valle" class="img-fluid" style="display: none;">
-                        </a>   
+                        <?php foreach ($emisoras[0]['banners'] as $banner): // Cambia el índice según la emisora correspondiente ?>
+                            <a href="#" target="_blank">
+                                <img src="<?= base_url('im/uploads/' . $banner->banner); ?>" alt="banner_<?= $banner->banner; ?>" class="img-fluid"> <!-- Ruta actualizada -->
+                            </a>
+                        <?php endforeach; ?>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -270,6 +255,9 @@
             </div>
         </div>
     </div>
+
+
+
 
     <div class="telebin" id="telebinRadio1" style="display: none;">
     <div class="animation">
