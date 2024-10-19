@@ -351,13 +351,13 @@ footer {
     top: 0;
     left: 0;
     height: 100vh;
-    z-index: 1030; /* Asegúrate de que el sidebar esté por encima del contenido principal */
+    z-index: 1030; 
 }
 .content-wrapper {
-    margin-left: 250px; /* Ajusta el margen según el ancho del sidebar */
+    margin-left: 250px;
 }
 
 
 .content-wrapper {
-    margin-left: 250px; /* O ajusta según el ancho del sidebar */
+    margin-left: 250px; 
 }

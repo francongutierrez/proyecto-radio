@@ -7,6 +7,7 @@ use CodeIgniter\RESTful\ResourceController;
 use App\Models\EmisorasModel;
 use App\Models\ClickModel;
 use App\Models\ClientesModel;
+use App\Models\UsuariosModel;
 
 class App extends ResourceController
 {
@@ -21,18 +22,41 @@ class App extends ResourceController
             return redirect()->to(base_url('/login')); 
         } else {
             $emisorasModel = new EmisorasModel();
+            $clientesModel = new ClientesModel(); // Modelo para clientes
+    
+            // Obtener emisoras y sus clicks
             $clickModel = new ClickModel();
             $emisoras = $emisorasModel->findAll();
             foreach ($emisoras as &$emisora) {
                 $clickData = $clickModel->where('radio_id', $emisora['id'])->first();
                 $emisora['clicks'] = $clickData ? $clickData['clicks'] : 0;
             }
-            $data['title'] = 'Radios';  
+    
+            // Obtener todos los clientes
+            $clientes = $clientesModel->findAll();
+            
+            // Obtener los 4 clientes con más clicks
+            usort($clientes, function ($a, $b) {
+                return $b['clicks'] <=> $a['clicks']; // Ordenar de mayor a menor
+            });
+            $topClients = array_slice($clientes, 0, 4); // 4 clientes con más clicks
+    
+            // Obtener los 4 clientes con menos clicks
+            usort($clientes, function ($a, $b) {
+                return $a['clicks'] <=> $b['clicks']; // Ordenar de menor a mayor
+            });
+            $bottomClients = array_slice($clientes, 0, 4); // 4 clientes con menos clicks
+    
+            $data['title'] = 'Radios';
             $data['emisoras'] = $emisoras;
+            $data['topClients'] = $topClients; // Clientes con más clicks
+            $data['bottomClients'] = $bottomClients; // Clientes con menos clicks
+    
             return view('app_gestion/dashboard', $data); 
         }
-
     }
+    
+    
 
     /**
      * Return the properties of a resource object.
@@ -181,7 +205,7 @@ class App extends ResourceController
             $errors[] = 'El correo electrónico no es válido.';
         } else {
             // Usar el modelo para verificar si el email ya existe
-            $usuarioModel = new UsuarioModel();
+            $usuarioModel = new UsuariosModel();
             if ($usuarioModel->emailExists($email)) {
                 $errors[] = 'El correo electrónico ya está en uso.';
             }

@@ -1,6 +1,6 @@
-<?= $this->extend('app_gestion/template'); ?> <!-- Extender el template -->
+<?= $this->extend('app_gestion/template'); ?> 
 
-<?= $this->section('content'); ?> <!-- Contenido dinámico -->
+<?= $this->section('content'); ?> 
 
 <div class="container">
     <div class="row mb-3">
@@ -11,7 +11,6 @@
 
     <div class="row">
         <div class="col">
-            <!-- Listado de usuarios -->
             <?php if (!empty($usuarios) && is_array($usuarios)): ?>
                 <ul class="list-group">
                     <?php foreach ($usuarios as $usuario): ?>
@@ -21,12 +20,9 @@
                                 <p>Email: <?= esc($usuario['email']); ?></p>
                             </div>
                             <div>
-                                <!-- Botón de editar -->
                                 <a href="usuarios/edit/<?= esc($usuario['usuario_id']); ?>" class="btn btn-warning">Editar</a>
-                                
-                                <!-- Botón de eliminar -->
                                 <form action="<?= base_url('app/usuarios/delete/' . esc($usuario['usuario_id'])); ?>" method="post" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
-                                    <?= csrf_field(); ?> <!-- Protección CSRF -->
+                                    <?= csrf_field(); ?> 
                                     <button type="submit" class="btn btn-danger">Eliminar</button>
                                 </form>
                             </div>
@@ -39,12 +35,12 @@
         </div>
     </div>
 
-    <!-- Paginación -->
     <div class="row mt-4">
         <div class="col">
-            <?= $pager->links() ?> <!-- Mostrar los links de paginación -->
+            <?= $pager->links() ?> 
         </div>
     </div>
 </div>
 
 <?= $this->endSection(); ?>
+

@@ -1,8 +1,7 @@
-<?= $this->extend('app_gestion/template'); ?> <!-- Extender el template -->
+<?= $this->extend('app_gestion/template'); ?> 
 
-<?= $this->section('content'); ?> <!-- Contenido dinámico -->   
+<?= $this->section('content'); ?>   
 
-<!-- Mostrar errores de validación si existen -->
 <?php if (isset($validation)): ?>
     <div class="alert alert-danger">
         <?= $validation->listErrors() ?>
@@ -26,3 +25,4 @@
 </form>
 
 <?= $this->endSection(); ?>
+

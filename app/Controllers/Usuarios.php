@@ -105,7 +105,7 @@ class Usuarios extends ResourceController
         $usuarioModel->insert($data); // Insertar en la base de datos
     
         // Redireccionar con mensaje de éxito
-        return redirect()->to('/app/usuarios')->with('success', 'Usuario añadido exitosamente.');
+        return redirect()->to(base_url('/app/usuarios'))->with('success', 'Usuario añadido exitosamente.');
     }
     
 
@@ -206,14 +206,14 @@ class Usuarios extends ResourceController
         // Verificar si el usuario existe
         if (!$usuarioModel->find($id)) {
             // Si no existe, redirigir con un mensaje de error
-            return redirect()->to('/app/usuarios')->with('error', 'Usuario no encontrado.');
+            return redirect()->to(base_url('/app/usuarios'))->with('error', 'Usuario no encontrado.');
         }
 
         // Eliminar el usuario
         $usuarioModel->delete($id);
 
         // Redirigir con mensaje de éxito
-        return redirect()->to('/app/usuarios')->with('success', 'Usuario eliminado exitosamente.');
+        return redirect()->to(base_url('/app/usuarios'))->with('success', 'Usuario eliminado exitosamente.');
     }
 
 

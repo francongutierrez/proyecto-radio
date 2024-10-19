@@ -16,14 +16,19 @@ class Documentacion extends ResourceController
      */
     public function index()
     {
-        $model = new DocumentacionModel();
+        if (!session()->get('is_logged_in')) {
+            return redirect()->to(base_url('/login')); 
+        } else {
+            $model = new DocumentacionModel();
 
-        // Configura la paginación
-        $data['documentos'] = $model->paginate(10); // Ajusta el número de elementos por página
-        $data['pager'] = $model->pager;
-        $data['title'] = 'Documentación';
 
-        return view('app_gestion/documentacion_view', $data); // Asegúrate de que el nombre de la vista sea correcto
+            $data['documentos'] = $model->paginate(10); 
+            $data['pager'] = $model->pager;
+            $data['title'] = 'Documentación';
+    
+            return view('app_gestion/documentacion_view', $data);
+        }
+
     }
 
     /**
@@ -39,11 +44,16 @@ class Documentacion extends ResourceController
             return redirect()->to(base_url('/login')); 
         } else {
             $model = new DocumentacionModel();
-            $data['documento'] = $model->find($id);
+            $data['documento'] = $model->getDocumentoConAutor($id); // Llama al método que incluye el autor
+            if (!$data['documento']) {
+                // Manejo de error si no se encuentra el documento
+                return redirect()->to(base_url('/app/documentacion'))->with('error', 'Documento no encontrado');
+            }
             $data['title'] = 'Ver documento';
             return view('app_gestion/ver_documento_view', $data);
         }
     }
+    
 
     /**
      * Return a new resource object, with default properties.
@@ -70,15 +80,13 @@ class Documentacion extends ResourceController
      */
     public function create()
     {
-        // Verifica si el usuario está logueado
+
         if (!session()->get('is_logged_in')) {
             return redirect()->to(base_url('/login'));
         }
 
-        // Cargar el helper de formulario
         helper(['form']);
 
-        // Configuración de validación
         $validation =  \Config\Services::validation();
         $this->validate([
             'nombre' => 'required|min_length[3]|max_length[500]',
@@ -92,33 +100,27 @@ class Documentacion extends ResourceController
             ],
         ]);
 
-        // Verifica si hay errores de validación
         if ($this->validator->getErrors()) {
             return redirect()->back()->withInput()->with('validation', $validation);
         }
 
-        // Obtener datos del formulario
         $data = [
             'nombre' => $this->request->getVar('nombre'),
-            'contenido' => $this->request->getFile('contenido'), // Obtén el archivo
-            'autor' => session()->get('usuario_id'), // Obtener el usuario_id de la sesión
-            'created_at' => date('Y-m-d H:i:s'), // Fecha y hora actual
-            'updated_at' => date('Y-m-d H:i:s'), // Fecha y hora actual
+            'contenido' => $this->request->getFile('contenido'), 
+            'autor' => session()->get('usuario_id'), 
+            'created_at' => date('Y-m-d H:i:s'), 
+            'updated_at' => date('Y-m-d H:i:s'), 
         ];
-
-        // Cargar el modelo de documentación
         $documentacionModel = new DocumentacionModel();
 
-        // Mover el archivo a una ubicación específica
         if ($data['contenido']->isValid() && !$data['contenido']->hasMoved()) {
-            $fileName = $data['contenido']->getRandomName(); // Genera un nombre aleatorio para el archivo
-            $data['contenido']->move(FCPATH . 'uploads/documentos', $fileName); // Mover el archivo a la carpeta 'uploads/documentos'
-            $data['contenido'] = $fileName; // Actualiza el nombre del archivo en los datos para guardar en la DB
+            $fileName = $data['contenido']->getRandomName();
+            $data['contenido']->move(FCPATH . 'uploads/documentos', $fileName);
+            $data['contenido'] = $fileName;
         } else {
             return redirect()->back()->with('errors', 'Error al mover el archivo.')->withInput();
         }
 
-        // Guardar el documento
         if ($documentacionModel->insert($data)) {
             return redirect()->to(base_url('/app/documentacion'))->with('success', 'Documento creado exitosamente.');
         } else {
@@ -135,7 +137,15 @@ class Documentacion extends ResourceController
      */
     public function edit($id = null)
     {
-        //
+        if (!session()->get('is_logged_in')) {
+            return redirect()->to(base_url('/login')); 
+        } else {
+            helper(['form']);
+            $model = new DocumentacionModel();
+            $data['documento'] = $model->find($id);
+            $data['title'] = 'Editar documento';
+            return view('app_gestion/editar_documento_vista', $data);
+        }
     }
 
     /**
@@ -147,8 +157,64 @@ class Documentacion extends ResourceController
      */
     public function update($id = null)
     {
-        //
+        if (!session()->get('is_logged_in')) {
+            return redirect()->to(base_url('/login'));
+        }
+    
+        helper(['form']);
+        $documentoModel = new \App\Models\DocumentacionModel();
+        $documento = $documentoModel->find($id);
+    
+        if (!$documento) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound('Documento no encontrado');
+        }
+    
+
+        $rules = [
+            'nombre' => 'required|min_length[3]|max_length[500]',
+            'contenido' => 'max_size[contenido,10240]', // 10MB
+        ];
+    
+    
+        if ($this->validate($rules)) {
+
+
+            $file = $this->request->getFile('contenido');
+            $data = [
+                'nombre' => $this->request->getPost('nombre'),
+                'updated_at' => date('Y-m-d H:i:s'), 
+            ];
+
+            if ($file && $file->isValid() && !$file->hasMoved()) {
+
+
+
+                $oldFilePath = FCPATH . 'uploads/documentos/' . $documento['contenido'];
+                if (file_exists($oldFilePath)) {
+                    unlink($oldFilePath); 
+                }
+
+                // Mover el archivo nuevo
+                $newFileName = $file->getRandomName(); 
+                $file->move(FCPATH . 'uploads/documentos', $newFileName);
+
+                $data['contenido'] = $newFileName; 
+            }
+
+            $documentoModel->update($id, $data);
+
+
+            return redirect()->to(base_url('/app/documentacion'))->with('message', 'Documento actualizado con éxito.');
+        } else {
+            log_message('error', 'Validación fallida: ' . json_encode($this->validator->getErrors()));
+        }
+    
+        $data['validation'] = $this->validator;
+        $data['documento'] = $documento;
+        $data['title'] = 'Editar Documento';
+        return view('app_gestion/editar_documento_vista', $data);
     }
+    
 
     /**
      * Delete the designated resource object from the model.
@@ -159,6 +225,28 @@ class Documentacion extends ResourceController
      */
     public function delete($id = null)
     {
-        //
+        if (!session()->get('is_logged_in')) {
+            return redirect()->to(base_url('/login'));
+        }
+    
+        $documentoModel = new \App\Models\DocumentacionModel();
+        $documento = $documentoModel->find($id);
+    
+        if (!$documento) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound('Documento no encontrado');
+        }
+    
+
+        $filePath = FCPATH . 'uploads/documentos/' . $documento['contenido'];
+    
+
+        if (file_exists($filePath)) {
+            unlink($filePath); 
+        }
+    
+        $documentoModel->delete($id);
+    
+        return redirect()->to(base_url('/app/documentacion'))->with('message', 'Documento eliminado con éxito.');
     }
+    
 }

@@ -1,10 +1,9 @@
-<?= $this->extend('app_gestion/template'); ?> <!-- Extender el template -->
+<?= $this->extend('app_gestion/template'); ?> 
 
-<?= $this->section('content'); ?> <!-- Contenido dinámico -->
+<?= $this->section('content'); ?> 
 
 <div class="container">
 
-    <!-- Mostrar errores de validación -->
     <?php if (session()->getFlashdata('errors')): ?>
         <div class="alert alert-danger">
             <ul>
@@ -15,9 +14,8 @@
         </div>
     <?php endif; ?>
 
-    <!-- Formulario de edición -->
     <form action="<?= base_url('app/usuarios/update/' . esc($usuario['usuario_id'])); ?>" method="post">
-        <?= csrf_field(); ?> <!-- Protección CSRF -->
+        <?= csrf_field(); ?> 
         
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
@@ -50,3 +48,4 @@
 </div>
 
 <?= $this->endSection(); ?>
+

@@ -43,4 +43,14 @@ class DocumentacionModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    // En tu modelo DocumentacionModel
+    public function getDocumentoConAutor($id)
+    {
+        return $this->select('documentacion.*, usuarios.nombre AS autor_nombre')
+                    ->join('usuarios', 'usuarios.usuario_id = documentacion.autor') // Asegúrate de que 'autor' es el nombre de la columna que contiene el ID del autor
+                    ->where('documentacion.id', $id)
+                    ->first();
+    }
+
 }

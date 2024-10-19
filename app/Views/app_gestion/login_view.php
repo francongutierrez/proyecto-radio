@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grupo Terra - Aplicación de Gestion</title>
-    <!-- AdminLTE CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
 </head>
 <body class="hold-transition login-page">
@@ -14,7 +12,6 @@
   <div class="login-logo">
     <a href="#">Grupo <b>Terra</b></a>
   </div>
-  <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Inicia sesión para comenzar tu sesión</p>
@@ -53,15 +50,15 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-4">
+          <div class="col-4 text-center">
             <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
           </div>
         </div>
       </form>
 
-      <p class="mb-1">
+      <!-- <p class="mb-1">
         <a href="#">Olvidé mi contraseña</a>
-      </p>
+      </p> -->
       <!-- <p class="mb-0">
         <a href="/register" class="text-center">Registrarse</a>
       </p> -->

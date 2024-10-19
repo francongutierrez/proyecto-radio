@@ -20,9 +20,10 @@ $routes->post('/registrar', 'App::registrar');
 
 $routes->get('/app/clientes', 'Clientes::index');
 $routes->get('/app/clientes/new', 'Clientes::new');
+$routes->get('/app/clientes/show/(:num)', 'Clientes::show/$1');
 $routes->post('/app/clientes/crear', 'Clientes::create');
 $routes->get('app/clientes/edit/(:num)', 'Clientes::edit/$1');
-$routes->post('app/clientes/edit/(:num)', 'Clientes::update/$1');
+$routes->post('app/clientes/update/(:num)', 'Clientes::update/$1');
 $routes->post('app/clientes/delete/(:num)', 'Clientes::delete/$1');
 
 $routes->get('/app/usuarios', 'Usuarios::index');

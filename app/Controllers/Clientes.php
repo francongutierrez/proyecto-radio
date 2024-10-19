@@ -15,6 +15,13 @@ class Clientes extends ResourceController
      *
      * @return ResponseInterface
      */
+
+    protected $emisorasModel;
+
+    public function __construct()
+    {
+         $this->emisorasModel = new EmisorasModel();
+    }
     public function index()
     {
         if (!session()->get('is_logged_in')) {
@@ -47,8 +54,26 @@ class Clientes extends ResourceController
      */
     public function show($id = null)
     {
-        //
+        $clientModel = new ClientesModel();
+        $clienteEmisorasModel = new ClienteEmisorasModel();
+    
+        $client = $clientModel->find($id);
+        
+        if (!$client) {
+            return redirect()->to(base_url('/app/clientes'))->with('error', 'Cliente no encontrado.');
+        }
+    
+        $clientEmisoras = $clienteEmisorasModel->where('id_cliente', $id)->findColumn('id_emisora');
+    
+        $data = [
+            'title' => 'Detalles del Cliente',
+            'client' => $client,
+            'clientEmisoras' => $clientEmisoras,
+        ];
+    
+        return view('app_gestion/ver_cliente_vista', $data);
     }
+    
 
     /**
      * Return a new resource object, with default properties.
@@ -62,13 +87,13 @@ class Clientes extends ResourceController
         } else {
             helper(['form']);
     
-            // Obtener emisoras desde la base de datos
-            $emisorasModel = new \App\Models\EmisorasModel(); // Asumiendo que tienes un modelo EmisorasModel
-            $emisoras = $emisorasModel->findAll(); // Obtener todas las emisoras disponibles
+
+            $emisorasModel = new \App\Models\EmisorasModel(); 
+            $emisoras = $emisorasModel->findAll(); 
             
             $data = [
                 'title' => 'Crear cliente',
-                'emisoras' => $emisoras, // Pasar las emisoras a la vista
+                'emisoras' => $emisoras,
             ];
     
             return view('app_gestion/crear_cliente_vista', $data);
@@ -83,16 +108,15 @@ class Clientes extends ResourceController
      */
     public function create()
     {
-        helper(['form']); // Cargar el helper de formulario
-    
+        helper(['form']);
+
         if (!session()->get('is_logged_in')) {
             return redirect()->to(base_url('/login')); 
         } else {
-    
+
             $clienteModel = new ClientesModel();
-            $clienteEmisorasModel = new ClienteEmisorasModel(); // Asegúrate de instanciar el modelo aquí
-    
-            // Configurar las reglas de validación
+            $clienteEmisorasModel = new ClienteEmisorasModel(); 
+
             $rules = [
                 'nombre' => 'required',
                 'email' => 'required|valid_email',
@@ -105,16 +129,14 @@ class Clientes extends ResourceController
                 ],
                 'duracion' => 'required|numeric'
             ];
-    
+
             if ($this->validate($rules)) {
-                // Guardar el archivo subido
                 $file = $this->request->getFile('contenido');
                 if ($file->isValid() && !$file->hasMoved()) {
-                    // Mover el archivo a la carpeta 'public/uploads'
-                    $newName = $file->getRandomName(); // Genera un nombre aleatorio
-                    $file->move(FCPATH . 'img/uploads', $newName); // Cambiar WRITEPATH a FCPATH
+                    $newName = $file->getRandomName(); 
+                    $file->move(FCPATH . 'img/uploads', $newName); 
                 }
-    
+
                 // Insertar los datos en la base
                 $clienteId = $clienteModel->insert([
                     'nombre'     => $this->request->getPost('nombre'),
@@ -124,35 +146,31 @@ class Clientes extends ResourceController
                     'fecha_alta' => $this->request->getPost('fecha_alta'),
                     'contenido'  => $newName, 
                     'duracion'   => $this->request->getPost('duracion'),
-                    'created_at' => date('Y-m-d H:i:s'), // Cambia esto para usar la fecha actual
-                    'updated_at' => date('Y-m-d H:i:s'), // Cambia esto para usar la fecha actual
+                    'created_at' => date('Y-m-d H:i:s'), 
+                    'updated_at' => date('Y-m-d H:i:s'), 
                 ]);
-    
-                // Guardar las emisoras seleccionadas
-                $emisorasSeleccionadas = $this->request->getPost('emisoras');
 
+                $emisorasSeleccionadas = $this->request->getPost('emisoras');
 
                 if (!empty($emisorasSeleccionadas)) {
                     foreach ($emisorasSeleccionadas as $emisoraId) {
-                        // Aquí es donde podría haber un problema si el clienteId no está definido.
                         $clienteEmisorasModel->save([
                             'id_cliente' => $clienteId,
                             'id_emisora' => $emisoraId
                         ]);
                     }
                 }
-    
+
                 return redirect()->to(base_url('/app/clientes'))->with('success', 'Cliente creado exitosamente');
             } else {
-                // Si la validación falla, devolver errores
                 return view('app_gestion/crear_cliente_vista', [
                     'validation' => $this->validator,
                     'title' => 'Agregar Cliente',
-                    'emisoras' => $this->emisorasModel->findAll() // Asegúrate de pasar las emisoras de nuevo a la vista
+                    'emisoras' => $this->emisorasModel->findAll() 
                 ]);
             }
         }
-    
+
         return view('app_gestion/crear_cliente_vista', ['title' => 'Agregar Cliente']);
     }
     
@@ -169,20 +187,29 @@ class Clientes extends ResourceController
      */
     public function edit($id = null)
     {
-        // Cargar el modelo de cliente
         $clientModel = new ClientesModel();
-
-        // Buscar el cliente por ID
+        $emisorasModel = new \App\Models\EmisorasModel();
+        $clienteEmisorasModel = new ClienteEmisorasModel(); 
+    
         $client = $clientModel->find($id);
-
-        $data['title'] = 'Editar cliente';
-        $data['client'] = $client;
-
-
-
-        // Cargar la vista con los datos del cliente
-        echo view('app_gestion/editar_cliente_vista', $data);
+    
+        if (!$client) {
+            return redirect()->to(base_url('/app/clientes'))->with('error', 'Cliente no encontrado');
+        }
+    
+        $emisoras = $emisorasModel->findAll();
+        $clientEmisoras = $clienteEmisorasModel->where('id_cliente', $id)->findColumn('id_emisora');
+    
+        $data = [
+            'title' => 'Editar cliente',
+            'client' => $client,
+            'emisoras' => $emisoras, 
+            'clientEmisoras' => $clientEmisoras 
+        ];
+    
+        return view('app_gestion/editar_cliente_vista', $data);
     }
+    
 
     /**
      * Add or update a model resource, from "posted" properties.
@@ -194,29 +221,63 @@ class Clientes extends ResourceController
     public function update($id = null)
     {
         $clientModel = new ClientesModel();
-
-        // Validar los datos del formulario
+        $clienteEmisorasModel = new ClienteEmisorasModel();
+        
         $validation = \Config\Services::validation();
             
         $validation->setRules([
             'nombre'  => 'required|min_length[3]',
             'email' => 'required|valid_email',
+            'telefono' => 'required',
+            'fecha_alta' => 'required',
+            'duracion' => 'required|numeric',
         ]);
-
+    
         if ($validation->withRequest($this->request)->run()) {
-            // Obtener los datos del formulario
             $updatedData = [
                 'nombre'  => $this->request->getPost('nombre'),
                 'email' => $this->request->getPost('email'),
-           ];
-
-            // Actualizar el cliente
+                'telefono' => $this->request->getPost('telefono'),
+                'fecha_alta' => $this->request->getPost('fecha_alta'),
+                'duracion' => $this->request->getPost('duracion'),
+                'url' => $this->request->getPost('url'),
+            ];
+    
+            $file = $this->request->getFile('contenido');
+            if ($file->isValid() && !$file->hasMoved()) {
+                $newName = $file->getRandomName();
+                $file->move(FCPATH . 'img/uploads', $newName);
+                $updatedData['contenido'] = $newName; 
+            }
+    
             $clientModel->update($id, $updatedData);
-
-            // Redirigir con un mensaje de éxito
+            $clienteEmisorasModel->where('id_cliente', $id)->delete();
+    
+            $emisorasSeleccionadas = $this->request->getPost('emisoras');
+            if (!empty($emisorasSeleccionadas)) {
+                foreach ($emisorasSeleccionadas as $emisoraId) {
+                    $clienteEmisorasModel->save([
+                        'id_cliente' => $id,
+                        'id_emisora' => $emisoraId
+                    ]);
+                }
+            }
+    
             return redirect()->to(base_url('/app/clientes'))->with('success', 'Cliente actualizado exitosamente');
         }
+    
+        return view('app_gestion/editar_cliente_vista', [
+            'validation' => $this->validator,
+            'client' => $clientModel->find($id),
+            'emisoras' => (new \App\Models\EmisorasModel())->findAll(),
+            'clientEmisoras' => $clienteEmisorasModel->where('id_cliente', $id)->findColumn('id_emisora'), 
+            'title' => 'Editar cliente' 
+        ]);
     }
+    
+    
+    
+    
 
     /**
      * Delete the designated resource object from the model.
@@ -227,34 +288,28 @@ class Clientes extends ResourceController
      */
     public function delete($id = null)
     {
-        // Cargar los modelos necesarios
         $clientModel = new ClientesModel();
-        $clienteEmisorasModel = new ClienteEmisorasModel(); // Instanciar el modelo para cliente_emisoras
-        
-        // Verificar si el cliente existe
+        $clienteEmisorasModel = new ClienteEmisorasModel();
         $client = $clientModel->find($id);
         
         if ($client) {
-            // Obtener el nombre del archivo de la imagen (contenido)
-            $imageName = $client['contenido'];
-    
-            // Eliminar el archivo de la imagen si existe
-            $imagePath = FCPATH . 'img/uploads/' . $imageName; // Ruta completa del archivo
-            if (is_file($imagePath)) {
-                unlink($imagePath); // Eliminar el archivo
+            // Primero, elimina las relaciones de emisoras
+            $clienteEmisorasModel->where('id_cliente', $id)->delete();
+            
+            // Eliminar el archivo del banner si existe
+            $filePath = FCPATH . 'img/uploads/' . $client['contenido']; // Ruta completa al archivo
+            if (file_exists($filePath)) {
+                unlink($filePath); // Elimina el archivo
             }
-    
-            // Eliminar los registros relacionados en cliente_emisoras
-            $clienteEmisorasModel->where('id_cliente', $id)->delete(); // Eliminar los registros relacionados
-    
-            // Luego, eliminar el cliente
+            
+            // Luego, elimina el cliente
             $clientModel->delete($id);
-    
-            // Redirigir a la lista de clientes con un mensaje de éxito
-            return redirect()->route('app/clientes')->with('success', 'Cliente eliminado exitosamente');
+            
+            return redirect()->to(base_url('/app/clientes'))->with('success', 'Cliente eliminado exitosamente');
         } else {
-            // Si el cliente no existe, redirigir con un mensaje de error
-            return redirect()->route('app/clientes')->with('error', 'Cliente no encontrado');
+            return redirect()->to(base_url('/app/clientes'))->with('error', 'Cliente no encontrado');
         }
-    }    
+    }
+    
+      
 }

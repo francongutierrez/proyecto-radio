@@ -4,25 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grupo Terra - Aplicación de Gestion</title>
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css" />
-
-    <!-- Estilos personalizados -->
     <link rel="stylesheet" href="<?= base_url('styles.css') ?>">
-
-    <!-- Animate.css, FontAwesome, AdminLTE, Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
-
-    <!-- Icono de la página -->
     <link rel="icon" href="<?= base_url('img/logo_principal_ico.ico') ?>" type="image/x-icon">
-
-    <!-- Plyr.js para manejo de medios -->
     <script src="https://cdn.plyr.io/3.7.2/plyr.polyfilled.js"></script>
 </head>
 <body>
@@ -43,7 +33,7 @@
         </a>
         <div class="sidebar">
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="info">
+                <div class="info" style="color: white;">
                     <?= session()->get('nombre') ?>
                 </div>
             </div>
@@ -104,15 +94,12 @@
         </section>
     </div>
 
-    <!-- jQuery, Bootstrap y AdminLTE JS -->
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
-
-    <!-- Plyr.js -->
     <script src="https://cdn.jsdelivr.net/npm/mediaelement@5.0.5/mediaelement-and-player.min.js"></script>
-
-    <!-- Scripts personalizados -->
     <script src="<?= base_url('scripts.js') ?>"></script>
 </body>
 </html>
+

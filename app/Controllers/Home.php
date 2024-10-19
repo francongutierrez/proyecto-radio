@@ -15,52 +15,39 @@ class Home extends BaseController
     {
         $emisoraModel = new EmisorasModel();
         $clienteEmisorasModel = new ClienteEmisorasModel();
-
-        // Obtener todas las emisoras
         $emisoras = $emisoraModel->findAll();
-
-        // Asociar cada emisora con sus banners usando el modelo ClienteEmisorasModel
         foreach ($emisoras as &$emisora) {
-            // Obtener los banners para cada emisora
             $emisora['banners'] = $clienteEmisorasModel->obtenerBannersPorEmisora($emisora['id']);
+            foreach ($emisora['banners'] as &$banner) {
+                if (!isset($banner->duracion)) {
+                    $banner->duracion = 5000; // Duración por defecto en milisegundos (5 segundos)
+                }
+            }
         }
 
-        // Pasar los datos a la vista
         return view('index_view', [
             'emisoras' => $emisoras
         ]);
     }
+    
 
     public function registerClick()
     {
-        // Verifica si la solicitud es AJAX
         if ($this->request->isAJAX()) {
             $radioId = $this->request->getVar('radio_id');
-
-            // Cargar el modelo
             $clickModel = new ClickModel();
-
-            // Actualiza los clics en la base de datos
             $clickModel->incrementClick($radioId);
-
             return $this->response->setJSON(['status' => 'success']);
         }
     }
     public function registerBannerClick() {
-        // Asegurarse de que sea una solicitud AJAX
         if ($this->request->isAJAX()) {
             $clienteId = $this->request->getJSON()->cliente_id;
-    
-            // Cargar el modelo de Cliente
             $clientesModel = new \App\Models\ClientesModel();
-    
-            // Obtener el cliente y aumentar el número de clics
             $cliente = $clientesModel->find($clienteId);
-    
             if ($cliente) {
                 $cliente['clicks'] = $cliente['clicks'] + 1;
-                $clientesModel->save($cliente);  // Guardar los cambios
-    
+                $clientesModel->save($cliente); 
                 return $this->response->setJSON([
                     'status' => 'success',
                     'message' => 'Click registrado correctamente',
@@ -68,14 +55,12 @@ class Home extends BaseController
                 ]);
             }
     
-            // Si el cliente no se encuentra
             return $this->response->setJSON([
                 'status' => 'error',
                 'message' => 'Cliente no encontrado'
             ]);
         }
     
-        // Si no es una solicitud AJAX
         return $this->response->setStatusCode(400)->setJSON([
             'status' => 'error',
             'message' => 'Solicitud inválida'

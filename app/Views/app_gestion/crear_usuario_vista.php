@@ -1,12 +1,11 @@
-<?= $this->extend('app_gestion/template'); ?> <!-- Extender el template -->
+<?= $this->extend('app_gestion/template'); ?> 
 
-<?= $this->section('content'); ?> <!-- Contenido dinámico -->
+<?= $this->section('content'); ?> 
 
 <div class="container">
     
-    <!-- Formulario para añadir un usuario -->
     <form action="<?= base_url('app/usuarios/create'); ?>" method="post">
-        <?= csrf_field(); ?> <!-- Protección CSRF -->
+        <?= csrf_field(); ?> 
 
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
@@ -39,3 +38,4 @@
 </div>
 
 <?= $this->endSection(); ?>
+

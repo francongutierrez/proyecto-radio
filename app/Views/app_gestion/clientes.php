@@ -1,6 +1,6 @@
-<?= $this->extend('app_gestion/template'); ?> <!-- Extender el template -->
+<?= $this->extend('app_gestion/template'); ?> 
 
-<?= $this->section('content'); ?> <!-- Contenido dinámico -->
+<?= $this->section('content'); ?>
 
 <div class="container">
     <div class="row mb-3">
@@ -11,7 +11,6 @@
 
     <div class="row">
         <div class="col">
-            <!-- Listado de clientes -->
             <?php if (!empty($clientes) && is_array($clientes)): ?>
                 <ul class="list-group">
                     <?php foreach ($clientes as $cliente): ?>
@@ -22,12 +21,10 @@
                                 <p>Teléfono: <?= esc($cliente['telefono']); ?></p>
                             </div>
                             <div>
-                                <!-- Botón de editar -->
+                                <a href="clientes/show/<?= esc($cliente['id']); ?>" class="btn btn-info">Ver</a>
                                 <a href="clientes/edit/<?= esc($cliente['id']); ?>" class="btn btn-warning">Editar</a>
-                                
-                                <!-- Botón de eliminar -->
                                 <form action="<?= base_url('app/clientes/delete/' . esc($cliente['id'])); ?>" method="post" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este cliente?');">
-                                    <?= csrf_field(); ?> <!-- Protección CSRF -->
+                                    <?= csrf_field(); ?> 
                                     <button type="submit" class="btn btn-danger">Eliminar</button>
                                 </form>
                             </div>
@@ -40,10 +37,9 @@
         </div>
     </div>
 
-    <!-- Paginación -->
     <div class="row mt-4">
         <div class="col">
-            <?= $pager->links() ?> <!-- Mostrar los links de paginación -->
+            <?= $pager->links() ?> 
         </div>
     </div>
 </div>

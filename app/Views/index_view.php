@@ -95,32 +95,23 @@
                 </div>
                 <div class="modal-body">
                     <p class="d-flex align-items-center">
-                        95.1MHz. TERRA FM ES “LA 100 EN SAN LUIS”, La radio mas escuchada del país” con sus reconocidos conductores: Santiago del Moro, Guido Kaczka, Claudia Fontan, Julieta Prandi Alejandra Zalas, Sergio Lapegue, Jonathan Gabay, el “Pelado” Lopez, Ezequiel Dero, Mariano Peluffo, entre otros… Su éxito se debe a la perfecta fusión que coexiste entre las personalidades que están en su programación y a sus contenidos. Su trayectoria la llevo ser un referente en materia musical, es por eso que recibe a los artistas nacionales e internacionales más importantes del mundo de la música, lo cual hace de ella una propuesta muy atractiva, divertida, musical, informativa y de compañía, con los últimos hits, nacionales e internacionales y los clásicos retros de los ‘80 y ‘90.
+                        95.1MHz. TERRA FM ES “LA 100 EN SAN LUIS”, La radio más escuchada del país” con sus reconocidos conductores: Santiago del Moro, Guido Kaczka, Claudia Fontan, Julieta Prandi Alejandra Zalas, Sergio Lapegue, Jonathan Gabay, el “Pelado” Lopez, Ezequiel Dero, Mariano Peluffo, entre otros… Su éxito se debe a la perfecta fusión que coexiste entre las personalidades que están en su programación y a sus contenidos. Su trayectoria la llevó a ser un referente en materia musical, es por eso que recibe a los artistas nacionales e internacionales más importantes del mundo de la música, lo cual hace de ella una propuesta muy atractiva, divertida, musical, informativa y de compañía, con los últimos hits, nacionales e internacionales y los clásicos retros de los ‘80 y ‘90.
                     </p>
                     <audio id="playerRadio1" controls>
                         <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
                         Tu navegador no soporta la reproducción de audio.
                     </audio>
                     <div class="banner-container">
-                        <a href="https://www.toyotaalianz.com/" target="_blank">
-                            <img src="img/banners/banner_id_247.png" alt="banner_radio_terra" class="img-fluid" style="display: block;">
-                        </a>
-                        <a href="https://agenciasanluis.com/" target="_blank">
-                            <img src="img/banners/banner_id_288.png" alt="banner_radio_terra" class="img-fluid" style="display: none;">
-                        </a>
-                        <a href="https://www.facebook.com/profile.php?id=100058313264245" target="_blank">
-                            <img src="img/banners/banner_id_309.jpg" alt="banner_radio_terra" class="img-fluid" style="display: none;">
-                        </a>    
-                        <a href="https://hiperceramico.com.ar/promociones/" target="_blank">
-                            <img src="img/banners/banner_id_343.jpg" alt="banner_radio_terra" class="img-fluid" style="display: none;">
-                        </a>   
-                        <a href="https://www.facebook.com/elboticariofarmacia/" target="_blank">
-                            <img src="img/banners/banner_id_259.jpg" alt="banner_radio_terra" class="img-fluid" style="display: none;">
-                        </a>   
-                        <a href="https://autosmediterraneos.com.ar/" target="_blank">
-                            <img src="img/banners/banner_id_327.jpg" alt="banner_radio_terra" class="img-fluid" style="display: none;">
-                        </a>   
-                    </div>
+                        <?php if (!empty($emisoras[0]['banners'])): ?>
+                            <?php foreach ($emisoras[0]['banners'] as $banner): ?>
+                                <a href="<?= $banner->url; ?>" target="_blank" onclick="registerBannerClick(<?= $banner->id; ?>)"> <!-- Llama a la función con el ID del cliente -->
+                                    <img src="<?= base_url('img/uploads/' . $banner->banner); ?>" alt="banner_<?= $banner->banner; ?>" class="img-fluid">
+                                </a>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <!-- <p>No hay banners disponibles.</p> -->
+                        <?php endif; ?>
+                    </div>  
                 </div>
                 <div class="modal-footer">
                     <a href="img/grilla.png" data-toggle="lightbox" data-title="Programación" data-footer="TERRA FM" target="_blank">
@@ -130,6 +121,7 @@
             </div>
         </div>
     </div>
+
 
     <div class="modal fade modal-radio" id="modalRadio2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -142,40 +134,31 @@
                 </div>
                 <div class="modal-body">
                     <p class="d-flex align-items-center">
-                        95.1MHz. CIELO FM ES “LA 100 EN MERLO”, con cobertura a todo EL Valle del Conlara. (Merlo, Santa Rosa, Concaran, Tilisarao, Naschel, Carpintería, Los Molles, Cortaderas). La radio mas escuchada del país” con sus reconocidos conductores: Santiago del Moro, Guido Kaczka, Claudia Fontan, Julieta Prandi Alejandra Zalas, Sergio Lapegue, Jonathan Gabay, el “Pelado” Lopez, Ezequiel Dero, Mariano Peluffo, entre otros…Su éxito se debe a la perfecta fusión que coexiste entre las personalidades que están en su programación y a sus contenidos. Su trayectoria la llevo ser un referente en materia musical, es por eso que recibe a los artistas nacionales e internacionales más importantes del mundo de la música, lo cual hace de ella una propuesta muy atractiva, divertida, musical, informativa y de compañía, con los últimos hits, nacionales e internacionales y los clásicos retros de los ´80 y ¨90.
+                        95.1MHz. CIELO FM ES “LA 100 EN MERLO”, con cobertura a todo EL Valle del Conlara. (Merlo, Santa Rosa, Concaran, Tilisarao, Naschel, Carpintería, Los Molles, Cortaderas). La radio más escuchada del país” con sus reconocidos conductores: Santiago del Moro, Guido Kaczka, Claudia Fontan, Julieta Prandi Alejandra Zalas, Sergio Lapegue, Jonathan Gabay, el “Pelado” Lopez, Ezequiel Dero, Mariano Peluffo, entre otros… Su éxito se debe a la perfecta fusión que coexiste entre las personalidades que están en su programación y a sus contenidos. Su trayectoria la llevó a ser un referente en materia musical, es por eso que recibe a los artistas nacionales e internacionales más importantes del mundo de la música, lo cual hace de ella una propuesta muy atractiva, divertida, musical, informativa y de compañía, con los últimos hits, nacionales e internacionales y los clásicos retros de los ´80 y ¨90.
                     </p>
                     <audio id="playerRadio2" controls>
                         <source src="https://radio02.ferozo.com/proxy/ra02001508?mp=/stream" type="audio/mpeg">
                         Tu navegador no soporta la reproducción de audio.
                     </audio>
                     <div class="banner-container">
-                        <a href="https://www.toyotaalianz.com/" target="_blank">
-                            <img src="img/banners/banner_id_247.png" alt="banner_radio_cielo" class="img-fluid" style="display: block;">
-                        </a>
-                        <a href="https://agenciasanluis.com/" target="_blank">
-                            <img src="img/banners/banner_id_288.png" alt="banner_radio_cielo" class="img-fluid" style="display: none;">
-                        </a>
-                        <a href="https://www.facebook.com/profile.php?id=100058313264245" target="_blank">
-                            <img src="img/banners/banner_id_309.jpg" alt="banner_radio_cielo" class="img-fluid" style="display: none;">
-                        </a>    
-                        <a href="https://hiperceramico.com.ar/promociones/" target="_blank">
-                            <img src="img/banners/banner_id_343.jpg" alt="banner_radio_cielo" class="img-fluid" style="display: none;">
-                        </a>   
-                        <a href="https://www.facebook.com/elboticariofarmacia/" target="_blank">
-                            <img src="img/banners/banner_id_259.jpg" alt="banner_radio_cielo" class="img-fluid" style="display: none;">
-                        </a>   
-                        <a href="https://autosmediterraneos.com.ar/" target="_blank">
-                            <img src="img/banners/banner_id_327.jpg" alt="banner_radio_cielo" class="img-fluid" style="display: none;">
-                        </a>   
-                    </div>
-                    
+                        <?php if (!empty($emisoras[1]['banners'])): ?>
+                            <?php foreach ($emisoras[1]['banners'] as $banner): ?>
+                                <a href="<?= $banner->url; ?>" target="_blank" onclick="registerBannerClick(<?= $banner->id; ?>)"> <!-- Llama a la función con el ID del cliente -->
+                                    <img src="<?= base_url('img/uploads/' . $banner->banner); ?>" alt="banner_<?= $banner->banner; ?>" class="img-fluid">
+                                </a>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <!-- <p>No hay banners disponibles.</p> -->
+                        <?php endif; ?>
+                    </div>  
                 </div>
-                <div class="modal-footer">
-                    <a href="img/grilla.png" target="_blank" class="btn btn-primary">Ver programación</a>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="img/grilla.png" target="_blank" class="btn btn-primary">Ver programación</a>
             </div>
         </div>
     </div>
+
 
     <div class="modal fade modal-radio" id="modalRadio3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -188,18 +171,22 @@
                 </div>
                 <div class="modal-body">
                     <p class="d-flex align-items-center">
-                        Es Cadena 3 Merlo, integra la red de emisoras de la Cadena 3 Argentina, la auténtica radio federal, que transmite en forma simultanea las 24 Hs. LV3 Cadena 3 Córdoba, desde Merlo y con cobertura a todo el Valle del Conlara.
+                        Es Cadena 3 Merlo, integra la red de emisoras de la Cadena 3 Argentina, la auténtica radio federal, que transmite en forma simultánea las 24 Hs. LV3 Cadena 3 Córdoba, desde Merlo y con cobertura a todo el Valle del Conlara.
                     </p>
                     <audio id="playerRadio3" controls>
                         <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
                         Tu navegador no soporta la reproducción de audio.
                     </audio>
                     <div class="banner-container">
-                        <?php foreach ($emisoras[2]['banners'] as $banner): ?>
-                            <a href="<?= $banner->url; ?>" target="_blank" onclick="registerBannerClick(<?= $banner->id; ?>)"> <!-- Llama a la función con el ID del cliente -->
-                                <img src="<?= base_url('img/uploads/' . $banner->banner); ?>" alt="banner_<?= $banner->banner; ?>" class="img-fluid">
-                            </a>
-                        <?php endforeach; ?>
+                        <?php if (!empty($emisoras[2]['banners'])): ?>
+                            <?php foreach ($emisoras[2]['banners'] as $banner): ?>
+                                <a href="<?= $banner->url; ?>" target="_blank" onclick="registerBannerClick(<?= $banner->id; ?>)"> <!-- Llama a la función con el ID del cliente -->
+                                    <img src="<?= base_url('img/uploads/' . $banner->banner); ?>" alt="banner_<?= $banner->banner; ?>" class="img-fluid">
+                                </a>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <!-- <p>No hay banners disponibles.</p> -->
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -208,6 +195,7 @@
             </div>
         </div>
     </div>
+
 
     <div class="modal fade modal-radio" id="modalRadio4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -226,35 +214,25 @@
                         <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
                         Tu navegador no soporta la reproducción de audio.
                     </audio>
-                    <div class="banner-container">
-                        <a href="https://www.toyotaalianz.com/" target="_blank">
-                            <img src="img/banners/banner_id_247.png" alt="banner_radio_por_vos" class="img-fluid" style="display: block;">
-                        </a>
-                        <a href="https://agenciasanluis.com/" target="_blank">
-                            <img src="img/banners/banner_id_288.png" alt="banner_radio_por_vos" class="img-fluid" style="display: none;">
-                        </a>
-                        <a href="https://www.facebook.com/profile.php?id=100058313264245" target="_blank">
-                            <img src="img/banners/banner_id_309.jpg" alt="banner_radio_por_vos" class="img-fluid" style="display: none;">
-                        </a>    
-                        <a href="https://hiperceramico.com.ar/promociones/" target="_blank">
-                            <img src="img/banners/banner_id_343.jpg" alt="banner_radio_por_vos" class="img-fluid" style="display: none;">
-                        </a>   
-                        <a href="https://www.facebook.com/elboticariofarmacia/" target="_blank">
-                            <img src="img/banners/banner_id_259.jpg" alt="banner_radio_por_vos" class="img-fluid" style="display: none;">
-                        </a>   
-                        <a href="https://autosmediterraneos.com.ar/" target="_blank">
-                            <img src="img/banners/banner_id_327.jpg" alt="banner_radio_por_vos" class="img-fluid" style="display: none;">
-                        </a>   
+                    <div class="banner-container" data-duracion="<?= isset($emisoras[3]['banners'][0]->duracion) ? esc($emisoras[3]['banners'][0]->duracion) : '5000'; ?>">
+                        <?php if (!empty($emisoras[3]['banners'])): ?>
+                            <?php foreach ($emisoras[3]['banners'] as $banner): ?>
+                                <a href="<?= esc($banner->url); ?>" target="_blank" onclick="registerBannerClick(<?= esc($banner->id); ?>)">
+                                    <img src="<?= base_url('img/uploads/' . esc($banner->banner)); ?>" alt="banner_<?= esc($banner->banner); ?>" class="img-fluid" style="display: none;"> <!-- Ocultamos todos inicialmente -->
+                                </a>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <!-- <p>No hay banners disponibles para esta emisora.</p> -->
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="https://comercial.cadena3.com/perfil-cadena-heat.asp#programacion" data-toggle="lightbox" data-title="Programación" data-footer="TERRA FM" target="_blank">
-                        <button type="button" class="btn btn-primary">Ver programación</button>
-                    </a>                
+                    <a href="https://comercial.cadena3.com/perfil-cadena-heat.asp#programacion" target="_blank" class="btn btn-primary">Ver programación</a>
                 </div>
             </div>
         </div>
     </div>
+
 
 
 

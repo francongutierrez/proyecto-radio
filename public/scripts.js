@@ -1,47 +1,56 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const modals = document.querySelectorAll('.modal-radio');
-
-    modals.forEach(modal => {
+    // Función para inicializar la rotación de banners en un contenedor
+    function initializeBannerRotation(container) {
         let currentBanner = 0;
-        const banners = modal.querySelectorAll('.banner-container img');
+        const banners = container.querySelectorAll('img');
         const totalBanners = banners.length;
+        const duracion = container.dataset.duracion;
+        banners.forEach(banner => {
+            banner.style.display = 'none';
+        });
+        if (banners.length > 0) {
+            banners[0].style.display = 'block';
+        }
 
         function rotateBanners() {
-            if (banners.length > 0) {
+            if (totalBanners > 0) {
                 banners[currentBanner].style.display = 'none';
                 currentBanner = (currentBanner + 1) % totalBanners;
                 banners[currentBanner].style.display = 'block';
             }
         }
 
-        setInterval(rotateBanners, 2000);
+        const rotationInterval = duracion ? parseInt(duracion) * 1000 : 2000;
+        return setInterval(rotateBanners, rotationInterval);
+    }
+
+    const modals = document.querySelectorAll('.modal-radio');
+    modals.forEach(modal => {
+        let intervalId = null;
+        modal.addEventListener('shown.bs.modal', function() {
+            const container = modal.querySelector('.banner-container');
+            if (container) {
+                if (intervalId) {
+                    clearInterval(intervalId);
+                }
+
+                intervalId = initializeBannerRotation(container);
+            }
+        });
+
+        modal.addEventListener('hidden.bs.modal', function() {
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
+            }
+        });
+    });
+
+    const nonModalBanners = document.querySelectorAll(':not(.modal) > .banner-container');
+    nonModalBanners.forEach(container => {
+        initializeBannerRotation(container);
     });
 });
-
-
-
-// document.addEventListener("DOMContentLoaded", function () {
-//     const bannerContainers = document.querySelectorAll('.banner-container');
-
-//     bannerContainers.forEach(container => {
-//         let currentBanner = 0;
-//         const banners = container.querySelectorAll('img');
-//         const totalBanners = banners.length;
-
-//         function rotateBanners() {
-//             if (banners.length > 0) {
-//                 banners[currentBanner].style.display = 'none';
-//                 currentBanner = (currentBanner + 1) % totalBanners;
-//                 banners[currentBanner].style.display = 'block';
-//             }
-//         }
-
-//         setInterval(rotateBanners, 10000);
-//     });
-// });
-
-
-
 
 
 
@@ -96,7 +105,7 @@ function registerBannerClick(clienteId) {
             'Content-Type': 'application/json',
             'X-Requested-With': 'XMLHttpRequest',
         },
-        body: JSON.stringify({ cliente_id: clienteId })  // Cambiamos a cliente_id
+        body: JSON.stringify({ cliente_id: clienteId }) 
     })
     .then(response => response.json())
     .then(data => {
@@ -136,11 +145,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.addEventListener("DOMContentLoaded", function () {
         const fileInput = document.querySelector('input[name="contenido"]');
         const previewButton = document.getElementById('previewButton');
-        
-        // Deshabilitar el botón de previsualización inicialmente
         previewButton.disabled = true;
-
-        // Habilitar el botón de previsualización cuando se cargue una imagen
         fileInput.addEventListener('change', function () {
             if (fileInput.files && fileInput.files.length > 0) {
                 previewButton.disabled = false;
@@ -154,23 +159,20 @@ document.addEventListener("DOMContentLoaded", function() {
     function previewImage() {
         const fileInput = document.querySelector('input[name="contenido"]');
         
-        // Verificar si se ha seleccionado un archivo
         if (fileInput && fileInput.files && fileInput.files[0]) {
             const file = fileInput.files[0];
             const reader = new FileReader();
             
             reader.onload = function(e) {
-                // Mostrar la imagen en el modal
                 const modalImg = document.getElementById('modalImage');
                 if (modalImg) {
-                    modalImg.src = e.target.result; // Asignar la URL generada
+                    modalImg.src = e.target.result;
                 }
 
-                // Abrir el modal
                 const previewModal = new bootstrap.Modal(document.getElementById('previewModal'));
                 previewModal.show();
             }
 
-            reader.readAsDataURL(file); // Leer el archivo como URL de datos
+            reader.readAsDataURL(file); 
         }
     }

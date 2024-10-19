@@ -49,7 +49,7 @@ class ClienteEmisorasModel extends Model
     {
         // Construir la consulta
         return $this->db->table('clientes')
-            ->select('clientes.id, clientes.nombre, clientes.contenido AS banner, clientes.url') // Incluyendo 'url'
+            ->select('clientes.id, clientes.nombre, clientes.contenido AS banner, clientes.url, clientes.duracion') // Agregar el campo 'duracion'
             ->join('cliente_emisoras', 'clientes.id = cliente_emisoras.id_cliente')
             ->where('cliente_emisoras.id_emisora', $emisoraId)
             ->get()
