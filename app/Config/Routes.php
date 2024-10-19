@@ -33,8 +33,17 @@ $routes->post('app/usuarios/update/(:num)', 'Usuarios::update/$1');
 $routes->post('app/usuarios/delete/(:num)', 'Usuarios::delete/$1');
 
 
+$routes->get('/app/documentacion', 'Documentacion::index');
+$routes->get('/app/documentacion/new', 'Documentacion::new');
+$routes->get('/app/documentacion/show/(:num)', 'Documentacion::show/$1');
+$routes->post('/app/documentacion/create', 'Documentacion::create');
+$routes->get('app/documentacion/edit/(:num)', 'Documentacion::edit/$1');
+$routes->post('app/documentacion/update/(:num)', 'Documentacion::update/$1');
+$routes->post('app/documentacion/delete/(:num)', 'Documentacion::delete/$1');
+
 // $routes->get('/app/clientes/editar/(:num)', 'App::editar/$1');
 
 
 $routes->post('/register-click', 'Home::registerClick');
+$routes->post('/register-banner-click', 'Home::registerBannerClick');
 

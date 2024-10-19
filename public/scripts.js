@@ -89,6 +89,26 @@ function registerClick(radioId) {
 }
 
 
+function registerBannerClick(clienteId) {
+    fetch('/register-banner-click', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+        },
+        body: JSON.stringify({ cliente_id: clienteId })  // Cambiamos a cliente_id
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Click registrado para el cliente:', data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
+
 
 document.addEventListener("DOMContentLoaded", function() {
     const observerOptions = {

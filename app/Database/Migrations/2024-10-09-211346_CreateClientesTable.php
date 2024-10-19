@@ -47,6 +47,10 @@ class CreateClientesTable extends Migration
                 'type'       => 'INT',
                 'constraint' => '50',
             ],
+            'clicks' => [
+                'type'       => 'INT',
+                'constraint' => '10',
+            ],
             'created_at' => [
                 'type'       => 'DATETIME',
                 'null'       => true,

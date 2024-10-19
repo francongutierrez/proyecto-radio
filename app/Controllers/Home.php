@@ -46,6 +46,44 @@ class Home extends BaseController
             return $this->response->setJSON(['status' => 'success']);
         }
     }
+    public function registerBannerClick() {
+        // Asegurarse de que sea una solicitud AJAX
+        if ($this->request->isAJAX()) {
+            $clienteId = $this->request->getJSON()->cliente_id;
+    
+            // Cargar el modelo de Cliente
+            $clientesModel = new \App\Models\ClientesModel();
+    
+            // Obtener el cliente y aumentar el número de clics
+            $cliente = $clientesModel->find($clienteId);
+    
+            if ($cliente) {
+                $cliente['clicks'] = $cliente['clicks'] + 1;
+                $clientesModel->save($cliente);  // Guardar los cambios
+    
+                return $this->response->setJSON([
+                    'status' => 'success',
+                    'message' => 'Click registrado correctamente',
+                    'clicks' => $cliente['clicks']
+                ]);
+            }
+    
+            // Si el cliente no se encuentra
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Cliente no encontrado'
+            ]);
+        }
+    
+        // Si no es una solicitud AJAX
+        return $this->response->setStatusCode(400)->setJSON([
+            'status' => 'error',
+            'message' => 'Solicitud inválida'
+        ]);
+    }
+    
+
+
 
     public function appIndex()
     {
