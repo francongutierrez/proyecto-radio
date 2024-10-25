@@ -224,6 +224,16 @@ class Clientes extends ResourceController
         $clienteEmisorasModel = new ClienteEmisorasModel();
         
         $validation = \Config\Services::validation();
+
+        $imageRules = $this->request->getFile('contenido') !== null 
+        ? [
+            'contenido' => [
+                'uploaded[contenido]',
+                'mime_in[contenido,image/jpg,image/jpeg,image/png]',
+                'max_size[contenido,2048]',
+            ]
+        ] 
+        : [];
             
         $validation->setRules([
             'nombre'  => 'required|min_length[3]',
@@ -267,7 +277,7 @@ class Clientes extends ResourceController
         }
     
         return view('app_gestion/editar_cliente_vista', [
-            'validation' => $this->validator,
+            'validation' => $validation, 
             'client' => $clientModel->find($id),
             'emisoras' => (new \App\Models\EmisorasModel())->findAll(),
             'clientEmisoras' => $clienteEmisorasModel->where('id_cliente', $id)->findColumn('id_emisora'), 

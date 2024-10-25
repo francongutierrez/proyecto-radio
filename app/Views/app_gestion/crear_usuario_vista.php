@@ -2,6 +2,17 @@
 
 <?= $this->section('content'); ?> 
 
+<?php if (isset($validation) && $validation->getErrors()): ?>
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            <?php foreach ($validation->getErrors() as $error): ?>
+                <li><?= esc($error) ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
+
+
 <div class="container">
     
     <form action="<?= base_url('app/usuarios/create'); ?>" method="post">

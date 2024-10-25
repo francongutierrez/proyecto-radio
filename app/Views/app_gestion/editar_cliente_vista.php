@@ -2,7 +2,16 @@
 
 <?= $this->section('content'); ?>
 
-<?= \Config\Services::validation()->listErrors(); ?>
+<?php if (isset($validation) && $validation->getErrors()): ?>
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            <?php foreach ($validation->getErrors() as $error): ?>
+                <li><?= esc($error) ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
+
 
 <form action="<?= base_url('app/clientes/update/' . $client['id']) ?>" method="post" enctype="multipart/form-data">
     <div class="form-group">
@@ -29,7 +38,7 @@
     </div>
 
     <div class="form-group">
-        <label for="contenido">Banner (Imagen)</label>
+        <label for="contenido">Banner (imagen de 2MB o menos)</label>
         <input type="file" name="contenido" class="form-control" accept="image/jpg,image/jpeg,image/png">
         <small>
             Imagen actual: 

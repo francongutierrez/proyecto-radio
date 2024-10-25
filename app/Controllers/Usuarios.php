@@ -71,23 +71,54 @@ class Usuarios extends ResourceController
     public function create()
     {
         // Validar los datos del formulario
-        $validation =  \Config\Services::validation();
+        $validation = \Config\Services::validation();
         $validation->setRules([
-            'nombre' => 'required|min_length[3]|max_length[50]',
-            'email' => 'required|valid_email|is_unique[usuarios.email]',
-            'password' => 'required|min_length[6]|max_length[255]',
-            'rol' => 'required|in_list[1,2,3]',
+            'nombre' => [
+                'rules' => 'required|min_length[3]|max_length[50]',
+                'errors' => [
+                    'required' => 'El nombre es requerido',
+                    'min_length' => 'El nombre debe tener al menos 3 caracteres',
+                    'max_length' => 'El nombre no puede exceder los 50 caracteres'
+                ]
+            ],
+            'email' => [
+                'rules' => 'required|valid_email|is_unique[usuarios.email]',
+                'errors' => [
+                    'required' => 'El email es requerido',
+                    'valid_email' => 'Por favor ingrese un email válido',
+                    'is_unique' => 'Este email ya está registrado'
+                ]
+            ],
+            'password' => [
+                'rules' => 'required|min_length[6]|max_length[255]',
+                'errors' => [
+                    'required' => 'La contraseña es requerida',
+                    'min_length' => 'La contraseña debe tener al menos 6 caracteres',
+                    'max_length' => 'La contraseña no puede exceder los 255 caracteres'
+                ]
+            ],
+            'rol' => [
+                'rules' => 'required|in_list[1,2,3]',
+                'errors' => [
+                    'required' => 'El rol es requerido',
+                    'in_list' => 'Por favor seleccione un rol válido'
+                ]
+            ]
         ]);
     
-        if (!$this->validate($validation->getRules())) {
-            // Si la validación falla, volver a mostrar el formulario con errores
-            return redirect()->to('/app/usuarios/new')->withInput()->with('errors', $this->validator->getErrors());
+        // Si la validación falla
+        if (!$validation->withRequest($this->request)->run()) {
+            // Renderizar la vista con los errores
+            return view('app_gestion/crear_usuario_vista', [
+                'validation' => $validation,
+                'title' => 'Añadir usuario'
+            ]);
         }
     
         // Obtener los datos del formulario
         $nombre = $this->request->getPost('nombre');
         $email = $this->request->getPost('email');
-        $password = $this->request->getPost('password'); // Ya no hashees la contraseña aquí
+        $password = $this->request->getPost('password');
         $rol = $this->request->getPost('rol');
     
         // Crear el nuevo usuario
@@ -96,16 +127,22 @@ class Usuarios extends ResourceController
         $data = [
             'nombre' => $nombre,
             'email' => $email,
-            'password' => $password,  // Pasa la contraseña sin hashear
+            'password' => $password,
             'rol_id' => $rol,
-            'created_at' => date('Y-m-d H:i:s'), // Timestamp de creación
-            'updated_at' => date('Y-m-d H:i:s'), // Timestamp de actualización
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ];
     
-        $usuarioModel->insert($data); // Insertar en la base de datos
-    
-        // Redireccionar con mensaje de éxito
-        return redirect()->to(base_url('/app/usuarios'))->with('success', 'Usuario añadido exitosamente.');
+        try {
+            $usuarioModel->insert($data);
+            return redirect()->to(base_url('/app/usuarios'))->with('success', 'Usuario añadido exitosamente.');
+        } catch (\Exception $e) {
+            return view('app_gestion/crear_usuario_vista', [
+                'validation' => $validation,
+                'title' => 'Añadir usuario',
+                'error' => 'Hubo un error al crear el usuario. Por favor, intente nuevamente.'
+            ]);
+        }
     }
     
 

@@ -31,7 +31,7 @@
                         <a class="nav-link" href="#contacto"><b>Contactanos</b></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/app"><b><i class="fas fa-key"></i></b></a>
+                        <a class="nav-link" href="/app" target="_blank"><b><i class="fas fa-key"></i></b></a>
                     </li>
                 </ul>
             </div>
@@ -152,9 +152,11 @@
                         <?php endif; ?>
                     </div>  
                 </div>
-            </div>
-            <div class="modal-footer">
-                <a href="img/grilla.png" target="_blank" class="btn btn-primary">Ver programación</a>
+                <div class="modal-footer">
+                    <a href="img/grilla.png" data-toggle="lightbox" data-title="Programación" data-footer="TERRA FM" target="_blank">
+                        <button type="button" class="btn btn-primary">Ver programación</button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -174,7 +176,7 @@
                         Es Cadena 3 Merlo, integra la red de emisoras de la Cadena 3 Argentina, la auténtica radio federal, que transmite en forma simultánea las 24 Hs. LV3 Cadena 3 Córdoba, desde Merlo y con cobertura a todo el Valle del Conlara.
                     </p>
                     <audio id="playerRadio3" controls>
-                        <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
+                        <source src="https://radio01.ferozo.com/proxy/ra01001074?mp=/stream" type="audio/mpeg">
                         Tu navegador no soporta la reproducción de audio.
                     </audio>
                     <div class="banner-container">
@@ -274,7 +276,6 @@
 
 
     <div class="container mt-4 mb-4" id="climaSanLuis">
-        <h3 class="text-center mt-4 mb-4 animado">Estado del tiempo en la Ciudad de San Luis</h3>
         <div>
             <a class="weatherwidget-io" href="https://forecast7.com/es/n33d30n66d34/san-luis/" data-label_1="SAN LUIS" data-label_2="Clima" data-theme="dark" >SAN LUIS Clima</a>
             <script>
@@ -293,14 +294,12 @@
 
 
     <div class="container mt-4 mb-4" id="feedLa100">
-        <h3 class="text-center mt-4 mb-4 animado">Feed - La 100</h3>
             <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
             <div class="elfsight-app-2290e319-686d-4ebe-92bf-a65f0f796f9b" data-elfsight-app-lazy></div>
     </div>
 
 
     <div class="container mt-4 mb-4" id="climaMerlo">
-        <h3 class="text-center mt-4 mb-4 animado">Estado del tiempo en la Villa de Merlo</h3>
         <div>
             <a class="weatherwidget-io" href="https://forecast7.com/es/n32d35n65d02/villa-de-merlo/" data-label_1="MERLO" data-label_2="Clima" data-theme="dark" >MERLO Clima</a>
             <script>
@@ -310,7 +309,6 @@
     </div>
 
     <div class="container mt-4 mb-4" id="feedCadena3">
-        <h3 class="text-center mt-4 mb-4 animado">Feed - Cadena 3</h3>
         <script src="https://static.elfsight.com/platform/platform.js" async></script>
         <div class="elfsight-app-8ec4e786-aa24-498a-92af-2779576de49b" data-elfsight-app-lazy></div>
     </div>

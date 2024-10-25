@@ -2,9 +2,13 @@
 
 <?= $this->section('content'); ?>   
 
-<?php if (isset($validation)): ?>
+<?php if (isset($validation) && $validation->getErrors()): ?>
     <div class="alert alert-danger">
-        <?= $validation->listErrors() ?>
+        <ul class="mb-0">
+            <?php foreach ($validation->getErrors() as $error): ?>
+                <li><?= esc($error) ?></li>
+            <?php endforeach; ?>
+        </ul>
     </div>
 <?php endif; ?>
 

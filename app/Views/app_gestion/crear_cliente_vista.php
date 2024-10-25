@@ -35,7 +35,7 @@
     </div>
 
     <div class="form-group">
-        <label for="contenido">Banner</label>
+        <label for="contenido">Banner (imagen de 2MB o menos)</label>
         <input type="file" name="contenido" class="form-control" required>
     </div>
 

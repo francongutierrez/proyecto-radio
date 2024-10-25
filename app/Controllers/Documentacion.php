@@ -80,18 +80,24 @@ class Documentacion extends ResourceController
      */
     public function create()
     {
-
         if (!session()->get('is_logged_in')) {
             return redirect()->to(base_url('/login'));
         }
-
+    
         helper(['form']);
-
-        $validation =  \Config\Services::validation();
-        $this->validate([
-            'nombre' => 'required|min_length[3]|max_length[500]',
+    
+        $validation = \Config\Services::validation();
+        $validation->setRules([
+            'nombre' => [
+                'rules' => 'required|min_length[3]|max_length[500]',
+                'errors' => [
+                    'required' => 'El nombre es requerido',
+                    'min_length' => 'El nombre debe tener al menos 3 caracteres',
+                    'max_length' => 'El nombre no puede exceder los 500 caracteres'
+                ]
+            ],
             'contenido' => [
-                'rules' => 'uploaded[contenido]|max_size[contenido,10240]|ext_in[contenido,pdf,doc,docx,jpg,jpeg,png]', // Extensiones permitidas
+                'rules' => 'uploaded[contenido]|max_size[contenido,10240]|ext_in[contenido,pdf,doc,docx,jpg,jpeg,png]',
                 'errors' => [
                     'uploaded' => 'El archivo es requerido.',
                     'max_size' => 'El archivo no debe superar los 10 MB.',
@@ -99,32 +105,55 @@ class Documentacion extends ResourceController
                 ]
             ],
         ]);
-
-        if ($this->validator->getErrors()) {
-            return redirect()->back()->withInput()->with('validation', $validation);
+    
+        if (!$validation->withRequest($this->request)->run()) {
+            return view('app_gestion/crear_documento_vista', [
+                'validation' => $validation,
+                'title' => 'Añadir documento'
+            ]);
         }
-
+    
         $data = [
-            'nombre' => $this->request->getVar('nombre'),
-            'contenido' => $this->request->getFile('contenido'), 
-            'autor' => session()->get('usuario_id'), 
-            'created_at' => date('Y-m-d H:i:s'), 
-            'updated_at' => date('Y-m-d H:i:s'), 
+            'nombre' => $this->request->getPost('nombre'),
+            'contenido' => $this->request->getFile('contenido'),
+            'autor' => session()->get('usuario_id'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ];
+    
         $documentacionModel = new DocumentacionModel();
-
+    
         if ($data['contenido']->isValid() && !$data['contenido']->hasMoved()) {
             $fileName = $data['contenido']->getRandomName();
-            $data['contenido']->move(FCPATH . 'uploads/documentos', $fileName);
-            $data['contenido'] = $fileName;
+            try {
+                $data['contenido']->move(FCPATH . 'uploads/documentos', $fileName);
+                $data['contenido'] = $fileName;
+            } catch (\Exception $e) {
+                return view('app_gestion/crear_documento_vista', [
+                    'validation' => $validation,
+                    'title' => 'Añadir documento',
+                    'error' => 'Error al mover el archivo.'
+                ]);
+            }
         } else {
-            return redirect()->back()->with('errors', 'Error al mover el archivo.')->withInput();
+            return view('app_gestion/crear_documento_vista', [
+                'validation' => $validation,
+                'title' => 'Añadir documento',
+                'error' => 'Error al procesar el archivo.'
+            ]);
         }
-
-        if ($documentacionModel->insert($data)) {
-            return redirect()->to(base_url('/app/documentacion'))->with('success', 'Documento creado exitosamente.');
-        } else {
-            return redirect()->back()->with('errors', 'Error al crear el documento.')->withInput();
+    
+        try {
+            if ($documentacionModel->insert($data)) {
+                return redirect()->to(base_url('/app/documentacion'))
+                               ->with('success', 'Documento creado exitosamente.');
+            }
+        } catch (\Exception $e) {
+            return view('app_gestion/crear_documento_vista', [
+                'validation' => $validation,
+                'title' => 'Añadir documento',
+                'error' => 'Error al crear el documento.'
+            ]);
         }
     }
 
