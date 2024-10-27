@@ -1,6 +1,6 @@
 # Grupo Terra
 
-Este proyecto forma parte de la web pública del Grupo Terra y también forma parte de la Práctica Técnica Supervisada de la carrera Tecnicatura Universitaria en Web de la Universidad Nacional de San Luis.
+Este proyecto forma parte de la web del Grupo Terra y también forma parte de la Práctica Técnica Supervisada de la carrera Tecnicatura Universitaria en Web de la Universidad Nacional de San Luis.
 
 Está desarrollado con **PHP**, **JavaScript**, **CSS**, **CodeIgniter 4** y **Bootstrap** como tecnologías principales. Además, utiliza APIs de terceros como **ElfSight** y **WeatherWidget.io** para implementar funcionalidades específicas del sitio.
 
