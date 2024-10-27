@@ -213,7 +213,7 @@
                         Cadena Heat ya se escucha en más de 50 señales de Argentina y su lanzamiento incluye, además, la renovación de parte de su programación. La música tiene un rol protagónico y a través de una simple frase como "Un éxito, siempre" convertimos el slogan en un concepto que en todo momento garantiza una gran canción, cada vez que el oyente la sintonice.
                     </p>
                     <audio id="playerRadio4" controls>
-                        <source src="https://radio02.ferozo.com/proxy/ra02001507?mp=/stream" type="audio/mpeg">
+                        <source src="https://radio01.ferozo.com/proxy/ra01001077?mp=/stream" type="audio/mpeg">
                         Tu navegador no soporta la reproducción de audio.
                     </audio>
                     <div class="banner-container" data-duracion="<?= isset($emisoras[3]['banners'][0]->duracion) ? esc($emisoras[3]['banners'][0]->duracion) : '5000'; ?>">
